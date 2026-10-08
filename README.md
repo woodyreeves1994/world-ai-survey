@@ -1,32 +1,35 @@
-# Human / AI — The World AI Survey
+# Human / AI — The World Survey
 
-## V4 deployment
+Live site: https://woodyreeves1994.github.io/world-ai-survey/
 
-Live survey: https://woodyreeves1994.github.io/world-ai-survey/
+## Edition 05
 
-This repository publishes the HTML, CSS, and JavaScript from `world-ai-survey-v4.zip` unchanged. GitHub Pages serves the root of the default branch; `.nojekyll` disables Jekyll processing. Push site updates to that branch to republish.
+A warm editorial survey with responsive controls and twenty original cartoon SVG scenes. Illustrations show everyday objects and people connected to the question; animation is gentle, optional, and respects reduced-motion preferences.
 
-Responses and result calculations stay in the participant's browser. Participants can download their responses as JSON; there is no central response collection service.
+The question bank contains 28 questions. Each person follows a route of 18–28 questions based on their circumstances and previous answers. Seven focused follow-ups explore work pressure, support, reliance, choice, memory, trust, and meaning. Changing an earlier answer removes follow-up answers that no longer belong on the route. Multi-select questions have explicit limits, and “none” options are exclusive. The memory question and final written reflection can be skipped.
 
-The original archive documentation follows.
+Results include four descriptive indices with transparent calculations and answer evidence, a personalised introduction, relevant tensions, chosen boundaries and priorities, a desired future, and a complete answer atlas. Participants can download the fieldnotes as JSON or print them. These indices are reflections, not validated psychological scales or diagnoses.
 
-A cinematic, adaptive survey prototype exploring the psychological and social experience of rapid AI acceleration.
+## Run and verify
 
-## V3 changes
-- Expanded from 12 surface-level questions to a 55-question research bank.
-- Participants see roughly 38–45 questions depending on branching.
-- New themes: acceleration, work, self-worth, intelligence, usefulness, autonomy, dependency, creativity, relationships, loneliness, truth, memory, grief, power, difficulty, meaning and future expectations.
-- Uses trade-offs, forced choices, spectra, scenarios, multi-selects and written reflections rather than relying on standard agreement scales.
-- Answer selection updates in place, so choosing an option no longer re-renders or flashes the full scene.
-- New SVG editorial illustrations and animation system.
-- Dynamic high-contrast header/progress treatment for light and dark scenes.
-- Reduced-motion support via OS preference and manual toggle.
-- Strong keyboard focus, skip link, live announcements, Enter-to-continue and Escape-to-go-back.
-- Compact desktop layouts target one-question-per-viewport on standard laptop displays; mobile prioritises readability and permits vertical overflow where needed.
-- Results are expressed as tensions rather than a simplistic optimist/pessimist label.
+No build process or external JavaScript dependencies are required. Open `index.html` or serve this folder with a static HTTP server.
 
-## Run
-Open `index.html` directly in a modern browser. No build process is required.
+Run the branching and results checks with:
 
-## Production recommendations
-For a public study, move the prototype to React/Next.js and store anonymous responses in a properly consented research backend. Add sampling controls, localisation, demographic weighting, privacy notices, research ethics review, analytics, resilience for partial responses, and a live results/report layer.
+```sh
+node --test tests/survey-model.test.js
+```
+
+## Files
+
+- `index.html` — page structure and font loading
+- `styles.css` — editorial layout, responsive controls, motion and print styles
+- `survey-model.js` — question bank, branching, answer validation and results
+- `illustrations.js` — twenty native SVG scenes
+- `app.js` — accessible interactions, navigation, fieldnotes and exports
+
+## Hosting and data
+
+GitHub Pages serves the root of the default branch, `codex/publish-v4`. The branch name is retained from the original V4 deployment. `.nojekyll` disables Jekyll processing; pushing updates to the branch republishes the site.
+
+Answers are held in browser memory only. They are not uploaded, persisted after reloading, or collected centrally. Google Fonts is the only external resource; the interface has local serif and sans-serif fallbacks. Collecting study responses would require a separate backend and appropriate participant information.
