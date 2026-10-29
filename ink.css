@@ -62,9 +62,14 @@ input[type=range]::-moz-range-track { background:#526071; }
 @media(max-width:1000px) { .question-scene { gap:35px; } }
 @media(max-height:800px) and (min-width:801px) {
   .intro-copy h1 { font-size:46px; }
-  .question-copy h2 { font-size:34px; }
+  .question-copy h2 { font-size:31px; line-height:1.2; margin-bottom:18px; }
+  .question-meta { margin-bottom:10px; }
+  .answer-instruction { margin-bottom:10px; }
+  .choices { gap:8px; }
+  .choice { min-height:54px; padding:10px 16px; }
+  .answer-note:empty { min-height:0; margin:8px 0; }
   .editorial-art { max-height:360px; }
-  .question-scene { padding:28px 0; }
+  .question-scene { padding:18px 0; }
 }
 @media(max-width:800px) {
   #survey { min-height:calc(100svh - 184px); }

@@ -2,9 +2,9 @@
 
 [Open the survey](https://woodyreeves1994.github.io/world-ai-survey/) · [View study results](https://woodyreeves1994.github.io/world-ai-survey/results-admin.html)
 
-## Version 6
+## Visual release 7
 
-The earlier navy, gold and cyan visual style is back, with large controls, alternating light and dark question screens, subtle cartoon scenes, and optional motion. Adaptive routing and richer personal results are retained: a 28-question bank produces routes of 18–28 questions.
+Solid midnight blue, vertically centred questions, Libre Caslon Text headings and Roboto controls. Seventeen original ink drawings are traced into editable SVG paths, with coral accents and subtle detail animation. See [ARTWORK.md](ARTWORK.md) for the drawing workflow and font choice. Adaptive routing and richer personal results are retained: a 28-question bank produces routes of 18–28 questions. The data protocol remains version 6.
 
 ## Response collection
 
@@ -16,7 +16,7 @@ Database setup, access checks, and existing Life Wizard security advisories are 
 
 ## Run and check
 
-This is a static site with no browser JavaScript dependencies. Serve this folder with a static HTTP server. Google Fonts is optional; local sans-serif fallbacks are available.
+This is a static site with no browser JavaScript dependencies. Serve this folder with a static HTTP server. Google Fonts is optional; Georgia and Arial are available as fallbacks.
 
 ```sh
 node --test tests/*.test.js
