@@ -1,0 +1,66 @@
+/* Warm paper, ink typography, and restrained terracotta accents. */
+:root,body[data-theme=light] {
+  color-scheme:light;
+  --paper:#faf9f5; --navy:#faf9f5; --cream:#141413; --ink:#141413;
+  --white:#f1efe7; --muted:#65645e; --line:#d9d7ce;
+  --accent:#b65538; --gold:#141413; --coral:#b65538;
+  --sans:'DM Sans',Arial,sans-serif; --serif:'Lora',Georgia,serif;
+}
+html,body { background:#faf9f5; color:#141413; }
+body { font-family:var(--sans); }
+.telescopic-brand { font:700 25px/1 var(--sans); letter-spacing:.025em; text-transform:uppercase; color:var(--ink); gap:0; }
+.site-header .telescopic-brand { font-size:25px; }
+.motion-control,.site-footer { color:var(--muted); font-family:var(--sans); }
+.motion-control:hover { color:var(--ink); background:#eae8df; }
+.site-footer a:hover { color:var(--ink); }
+.progress-track { background:#dedcd3; }
+.progress-track>span { background:#141413; transition:width 220ms cubic-bezier(.22,.75,.25,1); }
+#survey { overflow-x:clip; }
+.scene { animation:none; }
+.intro-copy h1,.question-copy h2,.report-hero h1 { font-family:var(--serif); letter-spacing:-.035em; }
+.intro-copy h1 em,.hero h1 em,.why h2 em { color:var(--ink); }
+.eyebrow { color:var(--muted); }
+.primary,.card-cta { background:#141413; border-color:#141413; color:#faf9f5; box-shadow:none; border-radius:9px; }
+.primary:hover:enabled { background:#35352f; border-color:#35352f; color:#faf9f5; box-shadow:none; transform:translateY(-1px); }
+.primary:disabled { color:#908f88; background:#e9e7df; border-color:#e9e7df; box-shadow:none; }
+.choice { color:var(--ink); background:transparent; border:1px solid #d1cfc5; border-radius:9px; transition:background 130ms,border-color 130ms,box-shadow 130ms; }
+.choice:hover { background:#efede5; border-color:#858479; }
+.choice[aria-checked=true] { background:#ece9df; border-color:#141413; box-shadow:inset 0 0 0 1px #141413; }
+.choice .selection-mark { border-color:#b8b6ac; }
+.choice[aria-checked=true] .selection-mark { background:#141413; border-color:#141413; color:#faf9f5; }
+.choice-letter { border-color:#c5c3b9; }
+.answer-note { color:#9b3c25; }
+.text-button { color:var(--ink); text-decoration-color:#8e8c82; }
+.text-button:hover { text-decoration-color:#141413; }
+.back-button,.time-note,.text-count { color:var(--muted); }
+.ink-paper { fill:#2f3c41; }
+.ink-coral { fill:#ba644c; }
+.editorial-art { filter:none; }
+.survey-card { background:#f0eee6; border:1px solid #d9d7ce; border-radius:14px; }
+.survey-card:hover,.survey-card:focus-visible { background:#eae7dd; border-color:#8b897e; }
+.hero-copy p:first-child,.why-copy .your-choice { color:var(--ink); }
+.quiet-link { text-decoration-color:#a5a397; }
+.quiet-link span { color:var(--ink); }
+.tiny-dot { background:#b65538; }
+textarea { background:#f3f1ea; border-color:#c8c5b9; color:var(--ink); border-radius:9px; }
+textarea::placeholder { color:#747269; }
+.dimension-card,.priority-card,.tension-card,.consent-label,.receipt-note { background:#f1efe7; border-color:#d9d7ce; border-radius:10px; }
+.dimension-track { background:#d9d6ca; }
+.dimension-track>span { background:#6c7761; }
+.dimension-head>span,.tension-number { color:#555e4d; }
+.future-note { color:var(--ink); background:#e8e6da; border-color:#d3d0c2; border-radius:12px; }
+.future-note .eyebrow,.future-note cite,.no-voice,.receipt-note { color:var(--muted); }
+.future-note blockquote { border-color:#c9c6b9; }
+.secondary { color:var(--ink); border-color:#b5b2a6; border-radius:9px; }
+.secondary:hover { background:#eeece3; }
+.admin-links a { background:#f1efe7; }
+.skip-link { background:#141413; color:#faf9f5; }
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible { outline:3px solid #a8482e; outline-offset:4px; }
+@media(max-width:800px) { .telescopic-brand,.site-header .telescopic-brand { font-size:22px; } }
+@media(prefers-reduced-motion:reduce) { .progress-track>span { transition:none; } }
+.reduce-motion .progress-track>span { transition:none; }
+@media(forced-colors:active) {
+  .choice[aria-checked=true] { outline:2px solid Highlight; }
+  .progress-track>span { background:Highlight; }
+  .primary { border:1px solid ButtonText; }
+}

@@ -15,11 +15,10 @@
   }
   function resetContribution() { state.startedAt=Date.now();state.receipt=null;state.contributed=false;state.submissionAttempted=false; }
   function progress() {
-    document.body.dataset.theme='dark';
+    document.body.dataset.theme='light';
     const path = M.route(state.answers);
     const index = path.findIndex(q => q.id === state.currentId);
-    const done = path.filter(q => M.hasAnswer(q, state.answers[q.id])).length;
-    const pct = state.mode === 'results' ? 100 : state.mode === 'intro' ? 0 : Math.min(99, Math.round(done / path.length * 100));
+    const pct = ['results','submit'].includes(state.mode) ? 100 : state.mode === 'intro' ? 0 : Math.round(Math.max(0,index) / path.length * 100);
     document.querySelector('#progressFill').style.width = `${pct}%`;
     document.querySelector('#progress').setAttribute('aria-valuenow', pct);
     document.querySelector('#progress').setAttribute('aria-valuetext', state.mode === 'question' ? `Question ${index + 1} of ${path.length} on your current route` : `${pct}%`);
@@ -42,22 +41,18 @@
   function instruction(q) {
     if (q.type === 'multi') return q.max ? `Choose up to ${q.max}` : 'Choose as many as apply';
     if (q.type === 'duel') return 'Choose the one closer to how you feel';
-    if (q.type === 'slider') return 'Find your place on the spectrum';
+    if (q.type === 'slider') return 'Choose the answer closest to how you feel';
     if (q.type === 'text') return 'Your words. As much or as little as you like.';
     return 'Choose one';
   }
   function controls(q) {
     const answer = state.answers[q.id];
-    if (q.type === 'slider') {
-      const value = typeof answer === 'number' ? answer : 50;
-      return `<div class="spectrum" style="--value:${value}%"><div class="spectrum-head"><output id="sliderValue" for="answerSlider">${value}<small> / 100</small></output></div><input id="answerSlider" type="range" min="0" max="100" step="1" value="${value}" aria-labelledby="questionTitle" aria-describedby="sliderEnds"><div class="spectrum-ends" id="sliderEnds"><span><b>0</b>${escape(q.left)}</span><span><b>100</b>${escape(q.right)}</span></div><div class="spectrum-tools"><button class="nudge" id="minusBtn" aria-label="Decrease by ten">−</button><button class="text-button middle-button" id="middleBtn">${typeof answer === 'number' ? 'Set to the middle' : 'Choose the middle'}</button><button class="nudge" id="plusBtn" aria-label="Increase by ten">+</button></div></div>`;
-    }
     if (q.type === 'text') return `<textarea id="textAnswer" aria-labelledby="questionTitle" maxlength="4000" placeholder="${escape(q.placeholder)}">${escape(answer)}</textarea><div class="text-count"><span>A thought, a feeling, a message.</span><span id="textCount">${typeof answer === 'string' ? answer.length : 0} / 4000</span></div>`;
     const multi = q.type === 'multi';
     const duel = q.type === 'duel';
-    return `<div class="choices ${multi ? 'choice-grid' : ''} ${duel ? 'duel-grid' : ''}" role="${multi ? 'group' : 'radiogroup'}" aria-labelledby="questionTitle" aria-describedby="answerInstruction">${q.options.map((option, index) => {
+    return `<div class="choices ${multi ? 'choice-grid' : ''} ${duel ? 'duel-grid' : ''}" role="${multi ? 'group' : 'radiogroup'}" aria-labelledby="questionTitle" aria-describedby="answerInstruction">${(q.responseOptions || q.options).map((option, index) => {
       const selected = multi ? (answer || []).includes(option.value) : answer === option.value;
-      const tab = multi || selected || (!answer && index === 0) ? 0 : -1;
+      const tab = multi || selected || (answer === undefined && index === 0) ? 0 : -1;
       return `<button class="choice ${duel ? 'duel-choice' : ''} ${(q.exclusive || []).includes(option.value) ? 'choice-wide' : ''}" type="button" role="${multi ? 'checkbox' : 'radio'}" aria-checked="${selected}" tabindex="${tab}" data-value="${escape(option.value)}">${duel ? `<span class="duel-top"><span class="choice-letter">${index ? 'B' : 'A'}</span><span class="selection-mark" aria-hidden="true">✓</span></span><span class="choice-text">${escape(option.label)}</span>` : `<span class="choice-text">${escape(option.label)}</span><span class="selection-mark" aria-hidden="true">✓</span>`}</button>`;
     }).join('')}</div>`;
   }
@@ -80,7 +75,7 @@
           return;
         }
         state.answers[q.id] = selection.values;
-      } else state.answers[q.id] = button.dataset.value;
+      } else state.answers[q.id] = q.responseOptions ? Number(button.dataset.value) : button.dataset.value;
       state.answers = M.reconcile(state.answers);
       paint(q);
     });
@@ -92,20 +87,13 @@
       const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : (index + (['ArrowLeft', 'ArrowUp'].includes(event.key) ? -1 : 1) + buttons.length) % buttons.length;
       buttons[next].click(); buttons[next].focus();
     });
-    const slider = document.querySelector('#answerSlider');
-    if (slider) {
-      const change = value => { state.answers[q.id] = Math.max(0, Math.min(100, Number(value))); state.answers = M.reconcile(state.answers); slider.value = state.answers[q.id]; paint(q); };
-      slider.addEventListener('input', () => change(slider.value));
-      document.querySelector('#minusBtn').addEventListener('click', () => change(Number(slider.value) - 10));
-      document.querySelector('#plusBtn').addEventListener('click', () => change(Number(slider.value) + 10));
-      document.querySelector('#middleBtn').addEventListener('click', () => change(50));
-    }
     const textarea = document.querySelector('#textAnswer');
     textarea?.addEventListener('input', () => { state.answers[q.id] = textarea.value; document.querySelector('#textCount').textContent = `${textarea.value.length} / 4000`; paint(q); });
     document.querySelector('#nextBtn').addEventListener('click', next);
     document.querySelector('#backBtn').addEventListener('click', back);
     document.querySelector('#skipBtn')?.addEventListener('click', () => { state.answers[q.id] = null; state.answers = M.reconcile(state.answers); next(); });
     paint(q);
+    progress();
     focusTitle();
     announce(`Question ${index + 1}. ${q.title}`);
   }
@@ -114,37 +102,38 @@
     const selected = Array.isArray(answer) ? answer : [answer];
     const buttons = [...main.querySelectorAll('[data-value]')];
     buttons.forEach((button, index) => {
-      const checked = selected.includes(button.dataset.value);
+      const checked = selected.includes(q.responseOptions ? Number(button.dataset.value) : button.dataset.value);
       button.setAttribute('aria-checked', checked);
-      if (q.type !== 'multi') button.tabIndex = checked || (!answer && index === 0) ? 0 : -1;
+      if (q.type !== 'multi') button.tabIndex = checked || (answer === undefined && index === 0) ? 0 : -1;
     });
     document.querySelector('#nextBtn').disabled = !M.hasAnswer(q, answer);
     if (q.type === 'multi') document.querySelector('#selectionCount').textContent = `${(answer || []).length}${q.max ? ` / ${q.max}` : ''} selected`;
-    if (q.type === 'slider') {
-      const value = typeof answer === 'number' ? answer : 50;
-      document.querySelector('#sliderValue').innerHTML = `${value}<small> / 100</small>`;
-      document.querySelector('.spectrum').style.setProperty('--value', `${value}%`);
-      document.querySelector('.figure').style.setProperty('--answer-shift', `${(value - 50) / 14}deg`);
-      document.querySelector('#middleBtn').textContent = typeof answer === 'number' ? 'Set to the middle' : 'Choose the middle';
-    }
     document.querySelector('#answerNote').textContent = '';
-    progress();
+  }
+  function swipe(render, direction = 1) {
+    render();
+    const scene = main.querySelector('.scene');
+    if (state.reduced || !scene?.animate) return;
+    scene.animate([
+      { opacity: 0, transform: 'translateX(' + (direction * 36) + 'px)' },
+      { opacity: 1, transform: 'translateX(0)' }
+    ], { duration: 220, easing: 'cubic-bezier(.22,.75,.25,1)' });
   }
   function next() {
     const q = M.byId[state.currentId];
     if (!M.hasAnswer(q, state.answers[q.id])) return;
     const path = M.route(state.answers);
     const index = path.findIndex(item => item.id === q.id);
-    if (index === path.length - 1) return finish();
+    if (index === path.length - 1) return swipe(finish);
     state.currentId = path[index + 1].id;
-    question();
+    swipe(question);
   }
   function back() {
     const path = M.route(state.answers);
     const index = path.findIndex(q => q.id === state.currentId);
-    if (index <= 0) return intro(true);
+    if (index <= 0) return swipe(() => intro(true), -1);
     state.currentId = path[index - 1].id;
-    question();
+    swipe(question, -1);
   }
   function finish() {
     if(window.SurveySubmission?.enabled&&!state.contributed) return contribution();
@@ -188,7 +177,7 @@
     document.querySelector('#exportBtn').addEventListener('click', () => {
       const payload = { survey: 'Telescopic — AI survey', version: 6, submission: {confirmed:state.contributed,receipt:state.receipt}, created: new Date().toISOString(), responses: r.answers, route: r.route, fieldnotes: {title: r.title, summary: r.summary, dimensions: r.dimensions, tensions: r.tensions, priorities: r.priorities, future: r.future, voice: r.voice}, answerAtlas: path.map(q => ({id: q.id, question: q.title, answer: M.label(q, state.answers[q.id]), skipped: state.answers[q.id] === null})) };
       const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'}));
-      const link = document.createElement('a'); link.href = url; link.download = 'human-ai-results-v6.json'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+      const link = document.createElement('a'); link.href = url; link.download = 'telescopic-results.json'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
     });
     document.querySelector('#printBtn').addEventListener('click', () => window.print());
     document.querySelector('#reviewBtn').addEventListener('click', () => { if(state.contributed){const atlas=document.querySelector('.answer-atlas');atlas.open=true;atlas.scrollIntoView({behavior:state.reduced?'instant':'smooth'});return;} state.currentId = path[0].id; question(); });

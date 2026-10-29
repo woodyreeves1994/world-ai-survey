@@ -33,6 +33,52 @@
     { id: 'future', chapter: 'A life ahead', title: 'Which future would you most want to live in?', art: 'garden', type: 'single', options: [o('tool', 'AI mainly supports human work'), o('together', 'Humans and powerful AI work side by side'), o('leisure', 'AI does most work and people work far less'), o('beyond', 'AI becomes more capable than us in almost every field'), o('other', 'None of these feels right to me')] },
     { id: 'builders', chapter: 'A life ahead', title: 'What is one thing you want AI’s builders to understand about being human?', art: 'letter', type: 'text', optional: true, placeholder: 'Something you hope they will remember…' }
   ];
+  // Ordered verbal choices preserve the existing numeric response protocol and branch thresholds.
+  const responseLabels = {
+  "keep-up": [
+    "Very easy",
+    "Fairly easy",
+    "Neither easy nor difficult",
+    "Fairly difficult",
+    "Very difficult"
+  ],
+  "future-picture": [
+    "Very clearly",
+    "Fairly clearly",
+    "Somewhat clearly",
+    "Not very clearly",
+    "Not at all clearly"
+  ],
+  "self-worth": [
+    "Not at all",
+    "A little",
+    "Somewhat",
+    "Quite a lot",
+    "A great deal"
+  ],
+  "choice-vs-control": [
+    "Definitely getting the best outcome",
+    "Leaning toward the best outcome",
+    "Both matter equally",
+    "Leaning toward making my own choice",
+    "Definitely making my own choice"
+  ],
+  "truth": [
+    "Not at all confident",
+    "Not very confident",
+    "Somewhat confident",
+    "Fairly confident",
+    "Very confident"
+  ],
+  "meaning": [
+    "Mostly freedom",
+    "More freedom than loss",
+    "An equal mix of both",
+    "More loss than freedom",
+    "Mostly a loss of meaning"
+  ]
+};
+  questions.forEach(q => { if(responseLabels[q.id]) q.responseOptions=responseLabels[q.id].map((label,index)=>({value:index*25,label})); });
   const byId = Object.fromEntries(questions.map(q => [q.id, q]));
   const route = answers => questions.filter(q => !q.when || q.when(answers));
   function reconcile(answers) {
@@ -62,7 +108,7 @@
   }
   function label(q, answer) {
     if (answer === null || answer === undefined) return 'Skipped';
-    if (q.type === 'slider') return `${answer} / 100 · ${q.left} ↔ ${q.right}`;
+    if (q.type === 'slider') return q.responseOptions?.find(option => option.value === answer)?.label || `${answer} / 100 · ${q.left} ↔ ${q.right}`;
     if (q.type === 'text') return answer;
     return (Array.isArray(answer) ? answer : [answer]).map(v => q.options.find(o => o.value === v)?.label || v).join(' · ');
   }
@@ -88,9 +134,9 @@
     else if (reliance >= 65) { title = 'AI is already part of the everyday.'; summary = 'AI’s absence would make some of your current activities difficult. Your answers start from lived usefulness, alongside the choices and boundaries you want to keep.'; }
     else if (positive) { title = 'Curious about the life ahead.'; summary = 'Curiosity, hope or excitement appears in your answers. The rest of your fieldnotes show the particular conditions and preferences that sit alongside that openness.'; }
     const dimensions = [
-      { key: 'pressure', name: 'Change pressure', value: pressure, left: 'Comfortable pace', right: 'Hard to keep up', source: ['pace', 'keep-up'], explanation: 'A simple average of your pace answer (0, 25, 55, 80 or 100) and your keep-up slider. Higher means more pressure from change.' },
+      { key: 'pressure', name: 'Change pressure', value: pressure, left: 'Comfortable pace', right: 'Hard to keep up', source: ['pace', 'keep-up'], explanation: 'A simple average of your pace answer (0, 25, 55, 80 or 100) and your keep-up answer, scored from 0 to 100 in five steps. Higher means more pressure from change.' },
       { key: 'reliance', name: 'Everyday reliance', value: reliance, left: 'Light touch', right: 'Hard to do without', source: ['dependency'], explanation: 'Your answer about losing access to AI, mapped in order to 0, 25, 55, 80 or 100. Higher means AI is harder for you to do without.' },
-      { key: 'ownership', name: 'Decision ownership', value: ownership, left: 'Best outcome', right: 'My own choice', source: ['choice-vs-control'], explanation: 'Your decision slider exactly as you set it. Higher means you put more weight on the decision feeling truly yours.' },
+      { key: 'ownership', name: 'Decision ownership', value: ownership, left: 'Best outcome', right: 'My own choice', source: ['choice-vs-control'], explanation: 'Your decision preference, scored from 0 to 100 in five steps. Higher means you put more weight on the decision feeling truly yours.' },
       { key: 'presence', name: 'Human presence', value: presence, left: 'Capability first', right: 'People matter', source: ['human-boundary', 'art-value'], explanation: 'An average of the proportion of seven roles where you preferred a human, and your art answer (human authorship = 100; feeling created = 0). A descriptive index, not a validated scale.' }
     ];
     const tensions = [];

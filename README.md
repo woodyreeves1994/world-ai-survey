@@ -4,6 +4,10 @@
 
 ## Telescopic landing page
 
+Visual release 10 uses warm off-white (`#faf9f5`), ink text, a plain uppercase wordmark, DM Sans and Lora. These open-source typefaces approximate the reference's custom sans/serif pairing. Ink drawings are recoloured for the light background. All six numeric questions now present five verbal answer choices; their ordered 0/25/50/75/100 values preserve the response protocol and branch thresholds. The submission function uses the same model to save readable answer labels. Older stored responses are unchanged.
+
+Progress represents the current route position and updates only on navigation. Next and Back use opposite 220ms entrance swipes, disabled for system or manual reduced motion. The UI checks cover unchanged progress during answer selection, dynamic branches, zero-valued answers, review, and motion preferences.
+
 Visual release 9 introduces the Telescopic wordmark and optical symbol, a plain progress line, and a minimal copyright/Home footer. Question chapter badges, branch labels and illustration captions have been removed. Accessible progress announcements, motion controls, question routing and consent remain available.
 
 The home page introduces the purpose of the survey series: helping people feel less alone through shared understanding of life changes. A large, fully clickable card opens the first AI survey at `survey.html`. `landing.css` and `landing.js` provide the responsive layout and accessible motion control. Add future surveys as links inside the existing `surveys` section; only the available AI survey is currently listed. The AI survey introduction uses the same welcoming purpose. Existing question routing, results and response collection are unchanged.
