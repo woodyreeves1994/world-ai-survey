@@ -1,6 +1,10 @@
 # Human / AI — The World AI Survey
 
-[Open the survey](https://woodyreeves1994.github.io/world-ai-survey/) · [View study results](https://woodyreeves1994.github.io/world-ai-survey/results-admin.html)
+[Open Human, together](https://woodyreeves1994.github.io/world-ai-survey/) · [Open the AI survey](https://woodyreeves1994.github.io/world-ai-survey/survey.html) · [View study results](https://woodyreeves1994.github.io/world-ai-survey/results-admin.html)
+
+## Human, together landing page
+
+The home page introduces the purpose of the survey series: helping people feel less alone through shared understanding of life changes. A large, fully clickable card opens the first AI survey at `survey.html`. `landing.css` and `landing.js` provide the responsive layout and accessible motion control. Add future surveys as links inside the existing `surveys` section; only the available AI survey is currently listed. The AI survey introduction uses the same welcoming purpose. Existing question routing, results and response collection are unchanged.
 
 ## Visual release 7
 
