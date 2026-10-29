@@ -1,8 +1,10 @@
-# Human / AI — The World AI Survey
+# Telescopic — The AI survey
 
-[Open Human, together](https://woodyreeves1994.github.io/world-ai-survey/) · [Open the AI survey](https://woodyreeves1994.github.io/world-ai-survey/survey.html) · [View study results](https://woodyreeves1994.github.io/world-ai-survey/results-admin.html)
+[Open Telescopic](https://woodyreeves1994.github.io/world-ai-survey/) · [Open the AI survey](https://woodyreeves1994.github.io/world-ai-survey/survey.html) · [View study results](https://woodyreeves1994.github.io/world-ai-survey/results-admin.html)
 
-## Human, together landing page
+## Telescopic landing page
+
+Visual release 9 introduces the Telescopic wordmark and optical symbol, a plain progress line, and a minimal copyright/Home footer. Question chapter badges, branch labels and illustration captions have been removed. Accessible progress announcements, motion controls, question routing and consent remain available.
 
 The home page introduces the purpose of the survey series: helping people feel less alone through shared understanding of life changes. A large, fully clickable card opens the first AI survey at `survey.html`. `landing.css` and `landing.js` provide the responsive layout and accessible motion control. Add future surveys as links inside the existing `surveys` section; only the available AI survey is currently listed. The AI survey introduction uses the same welcoming purpose. Existing question routing, results and response collection are unchanged.
 
