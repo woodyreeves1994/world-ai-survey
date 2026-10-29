@@ -67,4 +67,3 @@ revoke all on public.world_ai_results_summary,public.world_ai_answer_counts from
 grant select on public.world_ai_results_summary,public.world_ai_answer_counts to service_role;
 comment on table public.world_ai_responses is 'World AI Survey V6. Server-validated, consented submissions only. Read in Supabase Studio; no public or app-user read privileges.';
 comment on view public.world_ai_answer_counts is 'Counts per answered question. Multi-select percentages can sum to more than 100. Test submissions and written reflections are excluded.';
-
