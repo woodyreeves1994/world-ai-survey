@@ -6,6 +6,8 @@
 
 The home page introduces the purpose of the survey series: helping people feel less alone through shared understanding of life changes. A large, fully clickable card opens the first AI survey at `survey.html`. `landing.css` and `landing.js` provide the responsive layout and accessible motion control. Add future surveys as links inside the existing `surveys` section; only the available AI survey is currently listed. The AI survey introduction uses the same welcoming purpose. Existing question routing, results and response collection are unchanged.
 
+The landing page was verified live at 1280×720 and 390×844, including card navigation, starting the survey, returning to the collection, and switching animation off. The full card fits the compact desktop viewport. Neither layout has horizontal overflow; no browser errors were reported. All seven existing DOM submission/consent integration checks passed using the new `survey.html` entry point.
+
 ## Visual release 7
 
 Solid midnight blue, vertically centred questions, Libre Caslon Text headings and Roboto controls. Seventeen original ink drawings are traced into editable SVG paths, with coral accents and subtle detail animation. See [ARTWORK.md](ARTWORK.md) for the drawing workflow and font choice. Adaptive routing and richer personal results are retained: a 28-question bank produces routes of 18–28 questions. The data protocol remains version 6.
