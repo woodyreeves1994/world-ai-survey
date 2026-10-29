@@ -1,35 +1,31 @@
-# Human / AI — The World Survey
+# Human / AI — The World AI Survey
 
-Live site: https://woodyreeves1994.github.io/world-ai-survey/
+[Open the survey](https://woodyreeves1994.github.io/world-ai-survey/) · [View study results](https://woodyreeves1994.github.io/world-ai-survey/results-admin.html)
 
-## Edition 05
+## Version 6
 
-A warm editorial survey with responsive controls and twenty original cartoon SVG scenes. Illustrations show everyday objects and people connected to the question; animation is gentle, optional, and respects reduced-motion preferences.
+The earlier navy, gold and cyan visual style is back, with large controls, alternating light and dark question screens, subtle cartoon scenes, and optional motion. Adaptive routing and richer personal results are retained: a 28-question bank produces routes of 18–28 questions.
 
-The question bank contains 28 questions. Each person follows a route of 18–28 questions based on their circumstances and previous answers. Seven focused follow-ups explore work pressure, support, reliance, choice, memory, trust, and meaning. Changing an earlier answer removes follow-up answers that no longer belong on the route. Multi-select questions have explicit limits, and “none” options are exclusive. The memory question and final written reflection can be skipped.
+## Response collection
 
-Results include four descriptive indices with transparent calculations and answer evidence, a personalised introduction, relevant tensions, chosen boundaries and priorities, a desired future, and a complete answer atlas. Participants can download the fieldnotes as JSON or print them. These indices are reflections, not validated psychological scales or diagnoses.
+At the end, participants choose whether to submit their answers and optional reflection, or view their personal results privately. The submission endpoint validates every active question, recomputes the result indices, and saves to separate `world_ai_*` tables in the existing Life Wizard Supabase project. Retrying a submission reference does not create a second record.
 
-## Run and verify
+The [results page](https://woodyreeves1994.github.io/world-ai-survey/results-admin.html) links to private Supabase tables for completed submissions, readable answers, a study summary, and per-question answer counts. Sign in with a Supabase account that has access to the project. Records are not available to public survey visitors or ordinary Life Wizard app users. Responses from older browser-only versions were never collected centrally.
 
-No build process or external JavaScript dependencies are required. Open `index.html` or serve this folder with a static HTTP server.
+Database setup, access checks, and existing Life Wizard security advisories are documented in [database/README.md](database/README.md).
 
-Run the branching and results checks with:
+## Run and check
+
+This is a static site with no browser JavaScript dependencies. Serve this folder with a static HTTP server. Google Fonts is optional; local sans-serif fallbacks are available.
 
 ```sh
-node --test tests/survey-model.test.js
+node --test tests/*.test.js
 ```
 
-## Files
+`survey-model.js` contains the questions, branching and personal results. `database/validation.js` independently validates submissions. `database/edge-function.ts` runs on Supabase; the client uses a publishable app key, while privileged credentials stay in the server runtime.
 
-- `index.html` — page structure and font loading
-- `styles.css` — editorial layout, responsive controls, motion and print styles
-- `survey-model.js` — question bank, branching, answer validation and results
-- `illustrations.js` — twenty native SVG scenes
-- `app.js` — accessible interactions, navigation, fieldnotes and exports
+## Hosting
 
-## Hosting and data
+GitHub Pages serves the root of the existing default branch, `codex/publish-v4`; the branch name is retained from the initial deployment. `.nojekyll` disables Jekyll processing. Push updates to that branch to republish.
 
-GitHub Pages serves the root of the default branch, `codex/publish-v4`. The branch name is retained from the original V4 deployment. `.nojekyll` disables Jekyll processing; pushing updates to the branch republishes the site.
-
-Answers are held in browser memory only. They are not uploaded, persisted after reloading, or collected centrally. Google Fonts is the only external resource; the interface has local serif and sans-serif fallbacks. Collecting study responses would require a separate backend and appropriate participant information.
+Submission and personal results were checked through model tests, DOM integration checks and the live database API. A fresh visual browser check was unavailable because browser access approval timed out.
