@@ -1,0 +1,24 @@
+/* Whole-viewport snapshots travel together, with a reversed gesture for Back. */
+html[data-swipe]::view-transition-group(root) { animation:none; }
+html[data-swipe]::view-transition-image-pair(root) { isolation:isolate; }
+html[data-swipe]::view-transition-old(root),
+html[data-swipe]::view-transition-new(root) {
+  mix-blend-mode:normal;
+  animation-duration:340ms;
+  animation-timing-function:cubic-bezier(.65,0,.25,1);
+  animation-fill-mode:both;
+  object-position:top left;
+}
+html[data-swipe=forward]::view-transition-old(root) { animation-name:page-out-left; }
+html[data-swipe=forward]::view-transition-new(root) { animation-name:page-in-right; }
+html[data-swipe=back]::view-transition-old(root) { animation-name:page-out-right; }
+html[data-swipe=back]::view-transition-new(root) { animation-name:page-in-left; }
+@keyframes page-out-left { to { transform:translateX(-100vw); } }
+@keyframes page-in-right { from { transform:translateX(100vw); } to { transform:translateX(0); } }
+@keyframes page-out-right { to { transform:translateX(100vw); } }
+@keyframes page-in-left { from { transform:translateX(-100vw); } to { transform:translateX(0); } }
+.question-scene .ink-scene { animation:none; }
+html.reduce-motion::view-transition-old(root),html.reduce-motion::view-transition-new(root) { animation:none!important; }
+@media(prefers-reduced-motion:reduce) {
+  ::view-transition-old(root),::view-transition-new(root) { animation:none!important; }
+}

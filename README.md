@@ -4,6 +4,8 @@
 
 ## Telescopic landing page
 
+Visual release 12 preserves the 17 existing drawings and adds 11 original traced illustrations only for repeated question artwork. All 28 questions, including conditional follow-ups, now resolve to a distinct illustration. `question-illustrations.js` supplies the additions without changing the survey model or response protocol. `swipe.css` provides 340ms full-viewport transitions with a reversed Back direction, a full-width fallback for older browsers, navigation locking and reduced-motion support.
+
 Visual release 11 uses an original outlined SVG wordmark, removes the two introductory labels, and keeps textarea focus rings inside the control. After explicit submission consent and a successful save, a simple finish screen offers an optional private findings-email signup, a survey invitation card, and a downloadable 1080×1350 PNG summarising the participant's perspective. Native sharing is used where supported, with copy-link and image-download fallbacks. Email and free-text reflections never appear in the image. The signup list is ready for a later study update; automated email delivery is not configured.
 
 Visual release 10 uses warm off-white (`#faf9f5`), ink text, a plain uppercase wordmark, DM Sans and Lora. These open-source typefaces approximate the reference's custom sans/serif pairing. Ink drawings are recoloured for the light background. All six numeric questions now present five verbal answer choices; their ordered 0/25/50/75/100 values preserve the response protocol and branch thresholds. The submission function uses the same model to save readable answer labels. Older stored responses are unchanged.

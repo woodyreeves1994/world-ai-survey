@@ -15,3 +15,6 @@ Saltus's public CSS specifies TiemposHeadlineWeb for headings and Roboto for bod
 The page background is solid `#101f35`; light question themes are disabled. Questions and controls centre vertically in the available viewport space when they fit, and grow naturally when their content needs scrolling. Mobile artwork sits below the controls to keep the answer targets prominent.
 
 The data protocol remains version 6; this is a visual release, displayed as Survey 07. No response schema or scoring changes.
+# Release 12 additions
+
+The existing 17 illustrations are preserved. Eleven new original drawings replace repeated uses: pace, work changes, work fairness, replacement worries, support, missed tools, sources of pressure, memory boundaries, checking sources, public priorities, and purpose. Their generation prompts are in `assets/ink/question-prompts-v12.json`; the editable two-colour paths are `assets/ink/q-*.svg`. `question-illustrations.js` maps only those eleven question IDs. The remaining questions retain their existing artwork.

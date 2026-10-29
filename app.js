@@ -6,6 +6,8 @@
   const announcer = document.querySelector('#announcer');
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const state = { mode: 'intro', currentId: null, answers: {}, reduced: motionPreference.matches, manualMotion: false, startedAt: Date.now(), receipt: null, contributed: false, submissionAttempted: false };
+  let activeSwipe = null;
+  let navigating = false;
   const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[char]));
   const announce = message => { announcer.textContent = message; };
   const figure = art => `<figure class="figure" aria-hidden="true"><div class="art-stage">${Art.render(art)}</div></figure>`;
@@ -62,7 +64,7 @@
     const path = M.route(state.answers);
     const q = M.byId[state.currentId];
     const index = path.findIndex(item => item.id === q.id);
-    main.innerHTML = `<section class="scene question-scene" data-question-id="${q.id}"><div class="question-copy"><h2 id="questionTitle" tabindex="-1">${escape(q.title)}</h2><div class="answer-instruction" id="answerInstruction"><span>${instruction(q)}</span>${q.optional ? '<span class="optional-note">OPTIONAL</span>' : q.type === 'multi' ? '<span id="selectionCount">0 selected</span>' : ''}</div><div class="answer-area">${controls(q)}</div><p class="answer-note" id="answerNote" aria-live="polite"></p><div class="question-actions"><button class="back-button" id="backBtn" aria-label="Previous question"><span aria-hidden="true">←</span> Back</button><div class="next-actions">${q.optional ? `<button class="text-button skip-button" id="skipBtn">${q.type === 'text' ? 'Skip this reflection' : 'Skip this question'}</button>` : ''}<button class="primary" id="nextBtn">${index === path.length - 1 ? 'See my results' : 'Continue'} <span aria-hidden="true">→</span></button></div></div></div>${figure(q.art, `Fieldnote / ${String(index + 1).padStart(2, '0')}`)}</section>`;
+    main.innerHTML = `<section class="scene question-scene" data-question-id="${q.id}"><div class="question-copy"><h2 id="questionTitle" tabindex="-1">${escape(q.title)}</h2><div class="answer-instruction" id="answerInstruction"><span>${instruction(q)}</span>${q.optional ? '<span class="optional-note">OPTIONAL</span>' : q.type === 'multi' ? '<span id="selectionCount">0 selected</span>' : ''}</div><div class="answer-area">${controls(q)}</div><p class="answer-note" id="answerNote" aria-live="polite"></p><div class="question-actions"><button class="back-button" id="backBtn" aria-label="Previous question"><span aria-hidden="true">←</span> Back</button><div class="next-actions">${q.optional ? `<button class="text-button skip-button" id="skipBtn">${q.type === 'text' ? 'Skip this reflection' : 'Skip this question'}</button>` : ''}<button class="primary" id="nextBtn">${index === path.length - 1 ? 'See my results' : 'Continue'} <span aria-hidden="true">→</span></button></div></div></div>${figure(Art.questionKey?.(q.id) || q.art)}</section>`;
     const group = main.querySelector('.choices');
     group?.addEventListener('click', event => {
       const button = event.target.closest('[data-value]');
@@ -111,15 +113,39 @@
     document.querySelector('#answerNote').textContent = '';
   }
   function swipe(render, direction = 1) {
+    if (state.reduced) { render(); return; }
+    navigating = true;
+    main.inert = true;
+    document.querySelector('#homeBtn').disabled = true;
+    document.documentElement.dataset.swipe = direction > 0 ? 'forward' : 'back';
+    const release = () => {
+      activeSwipe = null; navigating = false; main.inert = false;
+      document.querySelector('#homeBtn').disabled = false;
+      delete document.documentElement.dataset.swipe;
+      focusTitle();
+    };
+    // Native snapshots move the entire viewport, including its paper background,
+    // instead of sliding individual controls or briefly fading the new page.
+    if (typeof document.startViewTransition === 'function') {
+      try {
+        activeSwipe = document.startViewTransition(render);
+        activeSwipe.finished.then(release, release);
+        return;
+      } catch { /* Older embedded browsers can expose an unavailable API. */ }
+    }
     render();
     const scene = main.querySelector('.scene');
-    if (state.reduced || !scene?.animate) return;
-    scene.animate([
-      { opacity: 0, transform: 'translateX(' + (direction * 36) + 'px)' },
-      { opacity: 1, transform: 'translateX(0)' }
-    ], { duration: 220, easing: 'cubic-bezier(.22,.75,.25,1)' });
+    if (!scene?.animate) { release(); return; }
+    const animation = scene.animate([
+      { transform: 'translateX(' + (direction * 100) + 'vw)' },
+      { transform: 'translateX(0)' }
+    ], { duration: 340, easing: 'cubic-bezier(.65,0,.25,1)' });
+    activeSwipe = { skipTransition: () => animation?.cancel?.() };
+    if (animation?.finished) animation.finished.then(release, release);
+    else release();
   }
   function next() {
+    if (navigating) return;
     const q = M.byId[state.currentId];
     if (!M.hasAnswer(q, state.answers[q.id])) return;
     const path = M.route(state.answers);
@@ -129,6 +155,7 @@
     swipe(question);
   }
   function back() {
+    if (navigating) return;
     const path = M.route(state.answers);
     const index = path.findIndex(q => q.id === state.currentId);
     if (index <= 0) return swipe(() => intro(true), -1);
@@ -173,6 +200,7 @@
     progress(); focusTitle(); announce('Your personal results are ready.');
   }
   function motion() {
+    if (state.reduced) activeSwipe?.skipTransition?.();
     document.documentElement.classList.toggle('reduce-motion', state.reduced);
     document.querySelector('#motionBtn').setAttribute('aria-pressed', state.reduced);
     document.querySelector('#motionLabel').textContent = state.reduced ? 'Motion off' : 'Motion on';
