@@ -4,6 +4,8 @@
 
 ## Telescopic landing page
 
+Visual release 11 uses an original outlined SVG wordmark, removes the two introductory labels, and keeps textarea focus rings inside the control. After explicit submission consent and a successful save, a simple finish screen offers an optional private findings-email signup, a survey invitation card, and a downloadable 1080×1350 PNG summarising the participant's perspective. Native sharing is used where supported, with copy-link and image-download fallbacks. Email and free-text reflections never appear in the image. The signup list is ready for a later study update; automated email delivery is not configured.
+
 Visual release 10 uses warm off-white (`#faf9f5`), ink text, a plain uppercase wordmark, DM Sans and Lora. These open-source typefaces approximate the reference's custom sans/serif pairing. Ink drawings are recoloured for the light background. All six numeric questions now present five verbal answer choices; their ordered 0/25/50/75/100 values preserve the response protocol and branch thresholds. The submission function uses the same model to save readable answer labels. Older stored responses are unchanged.
 
 Progress represents the current route position and updates only on navigation. Next and Back use opposite 220ms entrance swipes, disabled for system or manual reduced motion. The UI checks cover unchanged progress during answer selection, dynamic branches, zero-valued answers, review, and motion preferences.
@@ -20,7 +22,7 @@ Solid midnight blue, vertically centred questions, Libre Caslon Text headings an
 
 ## Response collection
 
-At the end, participants choose whether to submit their answers and optional reflection, or view their personal results privately. The submission endpoint validates every active question, recomputes the result indices, and saves to separate `world_ai_*` tables in the existing Life Wizard Supabase project. Retrying a submission reference does not create a second record.
+At the end, participants explicitly consent before submitting their answers and optional reflection. The submission endpoint validates every active question, recomputes the result indices, and saves to separate `world_ai_*` tables in the existing Life Wizard Supabase project. Retrying a submission reference does not create a second record. The optional email signup uses a separate table, without a receipt or response link. See `database/README.md` for the private list and delivery workflow.
 
 The [results page](https://woodyreeves1994.github.io/world-ai-survey/results-admin.html) links to private Supabase tables for completed submissions, readable answers, a study summary, and per-question answer counts. Sign in with a Supabase account that has access to the project. Records are not available to public survey visitors or ordinary Life Wizard app users. Responses from older browser-only versions were never collected centrally.
 

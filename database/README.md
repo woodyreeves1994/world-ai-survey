@@ -15,6 +15,14 @@ Participants explicitly choose whether to contribute. They can view their person
 
 ## Verification
 
+## Optional findings email list
+
+The finish screen offers a separate, unchecked opt-in for one email with the study findings. `world-ai-results-signup` validates the email and consent, checks that the supplied survey receipt exists, applies the existing private rate limiter, and inserts a unique normalised email. Emails are stored in `world_ai_results_subscribers` without a receipt or response link. Client reads and direct writes are revoked, and RLS is enabled. `world_ai_results_email_list` is the private Studio/export view; it excludes test signups. Repeated signup requests are idempotent.
+
+This collects a private mailing list; it does not send emails or configure an email delivery provider. Export the list when the collective findings are ready and send the promised study update. The reserved `example.invalid` QA address is marked as a test and excluded from the export view.
+
+The submission screen requires explicit answer-sharing consent. The former private-results shortcut has been removed. A failed submission retains the answers and receipt for retry; it never claims that the contribution was saved.
+
 The live API accepted a valid test submission and its retry, stored one row, and rejected missing consent, another origin, an invalid app key and an oversized body. Anonymous reads were rejected. Database privilege checks also denied reads to ordinary authenticated app users. Test rows are excluded from summary views.
 
 Run local model and validation checks with `node --test tests/*.test.js`.
