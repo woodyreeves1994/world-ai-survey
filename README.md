@@ -28,4 +28,4 @@ node --test tests/*.test.js
 
 GitHub Pages serves the root of the existing default branch, `codex/publish-v4`; the branch name is retained from the initial deployment. `.nojekyll` disables Jekyll processing. Push updates to that branch to republish.
 
-Submission and personal results were checked through model tests, DOM integration checks and the live database API. A fresh visual browser check was unavailable because browser access approval timed out.
+The visual release was checked on the live site at 1280×720, 1440×900 and 390×844. The complete 18-question mobile route reached private results without horizontal overflow or browser errors. The body background has no image or gradient throughout. Desktop question centring and the manual motion switch were verified. Fourteen model/submission tests and seven DOM integration checks passed. Database behaviour is unchanged from the previously verified version 6 integration; the visual checks did not submit test answers to the study.

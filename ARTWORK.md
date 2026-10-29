@@ -2,7 +2,7 @@
 
 Seventeen original drawings were generated with the built-in image-generation tool, then traced into two-colour SVG contour paths using VTracer. They are inspired by the expressive ink illustrations on the Saltus website; none of the Saltus illustrations or font files are copied into this project.
 
-The full prompt set is in `assets/ink/prompts.json`. Editable standalone SVGs are in `assets/ink/`. `illustrations.js` contains the same paths for synchronous, inline rendering with the site's motion switch. The pace, work-task and conversation scenes reuse the running, desk and tea illustrations respectively. Original raster drawings and the tracing script are included in the downloadable artwork source package.
+The full prompt set is in `assets/ink/prompts.json`. Editable standalone SVGs are in `assets/ink/`. `illustrations.js` contains the same paths for synchronous, inline rendering with the site's motion switch. The pace, work-task and conversation scenes reuse the running, desk and tea illustrations respectively. Original raster drawings are included in the downloadable artwork source package.
 
 The colour separation changes navy ink to cream for legibility on the solid midnight background. Coral accents remain. Disconnected water droplets, cup steam and watch hands have separate groups for subtle CSS animation. Every scene has a brief arrival animation and softly varying accent opacity. The manual motion switch and system reduced-motion preference disable animation.
 
