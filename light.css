@@ -33,8 +33,9 @@ body { font-family:var(--sans); }
 .text-button { color:var(--ink); text-decoration-color:#8e8c82; }
 .text-button:hover { text-decoration-color:#141413; }
 .back-button,.time-note,.text-count { color:var(--muted); }
-.ink-paper { fill:#2f3c41; }
-.ink-coral { fill:#ba644c; }
+.ink-paper,.ink-paper path { fill:#2f3c41; }
+.ink-coral,.ink-coral path { fill:#ba644c; }
+.ink-scene [stroke="#fff5e6"] { stroke:#2f3c41; }
 .editorial-art { filter:none; }
 .survey-card { background:#f0eee6; border:1px solid #d9d7ce; border-radius:14px; }
 .survey-card:hover,.survey-card:focus-visible { background:#eae7dd; border-color:#8b897e; }
