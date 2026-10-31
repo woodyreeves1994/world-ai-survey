@@ -1,3 +1,19 @@
+# Life with AI — V7 reporting
+
+Questionnaire ID: life-with-ai-2026-10-31. Exact question definitions, option codes and labels are in questionnaire-v7.json and the private world_ai_questionnaire_items table. The additive migration is life-with-ai-v7.sql. Deploy edge-function.ts with survey-model.js, validation.js, legacy-model-v6.js, legacy-validation-v6.js and deno.json. The endpoint continues accepting validated V6 submissions from existing open tabs.
+
+Each V7 record stores raw answers, exact rendered question and option wording, question order, full route, explicit skip states, not-shown states, questionnaire/consent versions, adult confirmation, duration, topic seed, eligible topics, allocation method and assignment probability. The seed is created once per session and remains stable through Back. Editing life context can remove an ineligible work topic; stale answers are discarded. Recent use means daily, several days a week, weekly or less than weekly within 30 days; previous, never and unsure are routed past usage/benefit/drawback questions.
+
+Use world_ai_v7_responses for participant-level cross-tabs and CSV exports. world_ai_v7_answer_breakdown includes zero-count options, labels, shown/answered bases and both percentage definitions. world_ai_v7_question_bases separates skipped from not shown. world_ai_v7_topic_summary shows topic coverage. The readable answers and general breakdown views include survey_version; filter before analysis. Legacy score summaries explicitly remain V6-only.
+
+Interpretation: this is a self-selected public website sample, not a representative world poll. Topic assignment is random among eligible modules, not a random population sample. Work has a different eligible base; stored assignment probabilities support transparent conditional analysis. Do not treat missing modules as negative answers, or unsure / prefer-not-to-answer / no-effect / neutral as interchangeable. Multi-select percentages may exceed 100%. Avoid small-cell demographic claims. Associations are not causal effects; do not compare rewritten V7 questions directly against V6. No invented numeric indices are stored for V7. No completion-duration promise has been validated by a respondent pilot.
+
+Written reflections are private. Public non-identifying quotations require the separate optional checkbox; world_ai_v7_quotable_reflections only includes affirmative permission. Review for identifying content before publication. Email consent is separate and emails are not joined to survey answers. Automated findings email delivery is not configured.
+
+Verification: 29 model/validation/illustration tests plus 12 complete mocked UI routes; private RLS and view privileges checked. Two reserved fixtures (4c3956f4-adc3-444e-9a91-21542e3b72f5 and 73e36cb1-fab8-4162-a278-7f637135b0d0) were inserted with is_test=true before endpoint retry checks. report-verification.sql runs denominator assertions against temporary copies and rolls back. Production test flags never change. Automatic review rejected unflagged synthetic submissions, so no fresh unflagged production submission was used for testing. Existing unrelated Life Wizard function/auth advisories were not changed.
+
+---
+
 # Survey response storage
 
 Results entry point: https://woodyreeves1994.github.io/world-ai-survey/results-admin.html

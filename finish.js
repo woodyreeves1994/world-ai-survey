@@ -7,6 +7,7 @@
     let line='';for(const word of text.split(' ')){const next=line?line+' '+word:word;if(ctx.measureText(next).width>width&&line){ctx.fillText(line,x,y);line=word;y+=lineHeight;}else line=next;}ctx.fillText(line,x,y);return y+lineHeight;
   }
   function perspectives(report){
+    if(report.perspectives)return report.perspectives;
     const score=key=>report.dimensions.find(d=>d.key===key)?.value??50;
     return [
       ['CHANGE',score('pressure')<=35?'Taking change in stride':score('pressure')>=65?'Looking for room to catch up':'Finding my own pace'],

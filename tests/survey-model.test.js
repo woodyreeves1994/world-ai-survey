@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const M = require('../survey-model');
+const M = require('../database/legacy-model-v6');
 const ids = a => M.route(a).map(q => q.id);
 
 test('work routes distinguish employment, study and neither', () => {

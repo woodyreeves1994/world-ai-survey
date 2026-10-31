@@ -1,156 +1,120 @@
-(function (root) {
+(function(root){
   'use strict';
-  const o = (value, label) => ({ value, label });
-  const work = a => ['working', 'studying', 'both'].includes(a.context);
-  const concern = a => (a.feelings || []).some(v => ['anxiety', 'fear', 'overwhelm', 'powerlessness'].includes(v)) || a['keep-up'] >= 65;
-  const questions = [
-    { id: 'pace', chapter: 'Change', title: 'How does the pace of AI development feel to you?', art: 'pace', type: 'single', options: [o('slow', 'Too slow. I want progress to move faster.'), o('right', 'About right.'), o('uneasy', 'A little faster than I’m comfortable with.'), o('fast', 'Much faster than I’m comfortable with.'), o('danger', 'Dangerously fast.')] },
-    { id: 'keep-up', chapter: 'Change', title: 'How easy is it for you to keep up with changes in AI?', art: 'running', type: 'slider', left: 'I can comfortably keep up', right: 'I feel completely left behind' },
-    { id: 'future-picture', chapter: 'Change', title: 'How clearly can you picture the role AI will play in your life in ten years?', art: 'map', type: 'slider', left: 'Very clearly', right: 'I can’t picture it at all' },
-    { id: 'context', chapter: 'Work & worth', title: 'What does your everyday life currently include?', art: 'desk', type: 'single', options: [o('working', 'Paid work'), o('studying', 'Study'), o('both', 'Both work and study'), o('neither', 'Neither at the moment'), o('private', 'I’d rather not say')] },
-    { id: 'work-changed', chapter: 'Work & worth', title: 'What has AI already changed about your work or study?', art: 'tasks', type: 'multi', max: 5, exclusive: ['none'], when: work, options: [o('faster', 'I finish some tasks faster'), o('automated', 'Some of my tasks are now automated'), o('output', 'More output is expected from me'), o('role', 'My role has changed'), o('skills', 'I’ve had to learn new skills'), o('fewer', 'My team needs fewer people'), o('new', 'New opportunities have appeared'), o('none', 'Nothing meaningful has changed yet')] },
-    { id: 'work-pressure', chapter: 'Work & worth', title: 'What would make AI’s effect on your work feel fairer?', art: 'calendar', type: 'multi', max: 3, branch: 'A little deeper on work', when: a => work(a) && (a['work-changed'] || []).some(v => ['output', 'automated', 'fewer'].includes(v)), options: [o('time', 'Giving some of the saved time back to people'), o('say', 'Having a say in how AI is introduced'), o('training', 'Time and support to learn'), o('security', 'Clearer job security'), o('benefits', 'Sharing the financial benefits'), o('limits', 'Limits on rising expectations')] },
-    { id: 'replace-worry', chapter: 'Work & worth', title: 'Which possibility worries you more about your working future?', art: 'chairs', type: 'duel', when: a => ['working', 'both'].includes(a.context), options: [o('machine', 'AI doing my job better than I can'), o('person', 'Someone using AI to do my job better than I can')] },
-    { id: 'one-day-week', chapter: 'Work & worth', title: 'If AI let you finish a week’s work in one day, what would most likely happen next?', art: 'calendar', type: 'single', when: work, options: [o('less', 'I’d get to work less'), o('more', 'I’d be expected to produce more'), o('expand', 'I’d take on different kinds of work'), o('change', 'The job itself would change'), o('unsure', 'I honestly don’t know')] },
-    { id: 'self-worth', chapter: 'Work & worth', title: 'If AI outperformed you at most intellectual tasks, how much would it change the way you value yourself?', art: 'mirror', type: 'slider', left: 'My value would feel unchanged', right: 'My sense of self would be shaken' },
-    { id: 'feelings', chapter: 'Work & worth', title: 'Which feelings come up most strongly when you think about powerful AI?', art: 'feelings', type: 'multi', max: 3, options: [o('excitement', 'Excitement'), o('curiosity', 'Curiosity'), o('hope', 'Hope'), o('anxiety', 'Anxiety'), o('fear', 'Fear'), o('overwhelm', 'Overwhelm'), o('optimism', 'Optimism'), o('powerlessness', 'Powerlessness')] },
-    { id: 'support', chapter: 'Work & worth', title: 'What would help you feel more at ease with AI change?', art: 'tea', type: 'multi', branch: 'A little deeper on change', exclusive: ['unsure'], when: concern, options: [o('understanding', 'Clear explanations of what AI can and can’t do'), o('slower', 'A slower pace of change'), o('boundaries', 'Stronger limits and safeguards'), o('learning', 'Practical help to learn'), o('conversation', 'Space to talk honestly about it'), o('choice', 'The freedom to choose whether to use it'), o('unsure', 'I’m not sure yet')] },
-    { id: 'dependency', chapter: 'Choice & control', title: 'If every AI tool disappeared tomorrow, how much would your work or everyday life be affected?', art: 'unplugged', type: 'single', options: [o('none', 'I’d barely notice'), o('little', 'Things would take a little longer'), o('some', 'I’d be considerably less productive'), o('much', 'Some things would become difficult'), o('essential', 'I’d struggle to manage things I currently do')] },
-    { id: 'missed-tools', chapter: 'Choice & control', title: 'Which kinds of AI help would you miss most?', art: 'tasks', type: 'multi', max: 3, branch: 'A little deeper on reliance', when: a => ['some', 'much', 'essential'].includes(a.dependency), options: [o('writing', 'Writing and communicating'), o('research', 'Finding and understanding information'), o('making', 'Making things'), o('planning', 'Planning and organising'), o('coding', 'Coding and technical tasks'), o('thinking', 'Having something to think things through with')] },
-    { id: 'agency', chapter: 'Choice & control', title: 'How free do you feel to choose whether you use AI?', art: 'doors', type: 'single', options: [o('free', 'Completely free to choose'), o('mostly', 'Mostly free to choose'), o('pressure', 'I have a choice, but the pressure is growing'), o('little', 'I have very little choice'), o('none', 'It barely feels like a choice at all')] },
-    { id: 'pressure-source', chapter: 'Choice & control', title: 'Where does the pressure to use AI come from for you?', art: 'desk', type: 'multi', max: 3, branch: 'A little deeper on choice', when: a => ['pressure', 'little', 'none'].includes(a.agency), options: [o('employer', 'My employer or workplace'), o('study', 'My education or training'), o('peers', 'People around me'), o('competition', 'The need to stay competitive'), o('services', 'Services that make AI hard to avoid'), o('self', 'My own expectations of myself')] },
-    { id: 'choice-vs-control', chapter: 'Choice & control', title: 'If AI knew which personal decision would work out best, what would matter more to you?', art: 'compass', type: 'slider', left: 'Getting the best outcome', right: 'Knowing the choice was truly mine' },
-    { id: 'human-boundary', chapter: 'Human connection', title: 'Where would you still prefer a human, even if AI could do the task better?', art: 'tea', type: 'multi', exclusive: ['none'], options: [o('doctor', 'A doctor'), o('therapist', 'A therapist'), o('teacher', 'A teacher'), o('manager', 'A manager'), o('adviser', 'A financial adviser'), o('collaborator', 'A creative collaborator'), o('partner', 'A romantic partner'), o('none', 'None of these. Capability matters more to me.')] },
-    { id: 'art-value', chapter: 'Human connection', title: 'When a piece of art moves you, which matters more?', art: 'painting', type: 'duel', options: [o('authorship', 'The human experience behind it'), o('feeling', 'The feeling it creates in me')] },
-    { id: 'grief', chapter: 'Human connection', title: 'Would you want to speak to an AI recreation of someone you had lost?', art: 'memory', type: 'single', optional: true, options: [o('yes', 'Definitely'), o('probably', 'Probably'), o('unsure', 'I’m unsure'), o('unlikely', 'Probably not'), o('no', 'Definitely not')] },
-    { id: 'memory-boundary', chapter: 'Human connection', title: 'What boundaries would you want around an AI recreation of a loved one?', art: 'memory', type: 'multi', max: 3, branch: 'A little deeper on memory', when: a => ['yes', 'probably', 'unsure'].includes(a.grief), options: [o('label', 'It must always be clear that it is a recreation'), o('consent', 'The person’s wishes must be respected'), o('family', 'The family must have a say'), o('limits', 'It must not replace my living relationships'), o('commercial', 'It must not be used to sell things to me'), o('stop', 'I must be able to stop and delete it')] },
-    { id: 'truth', chapter: 'Trust & power', title: 'How confident are you that you can tell real content from AI-generated content online?', art: 'newspaper', type: 'slider', left: 'Not confident at all', right: 'Very confident' },
-    { id: 'truth-support', chapter: 'Trust & power', title: 'What would most help you trust the things you see online?', art: 'newspaper', type: 'single', branch: 'A little deeper on trust', when: a => typeof a.truth === 'number' && a.truth <= 45, options: [o('source', 'Being able to check the original source'), o('labels', 'Clear labels on AI-generated content'), o('verification', 'Independent fact-checking'), o('education', 'Better tools for spotting misleading content'), o('unsure', 'I’m not sure anything would be enough')] },
-    { id: 'control-worry', chapter: 'Trust & power', title: 'Which kind of power worries you more?', art: 'chess', type: 'duel', options: [o('systems', 'AI systems becoming too powerful to control'), o('owners', 'A few people controlling very powerful AI')] },
-    { id: 'power-priority', chapter: 'Trust & power', title: 'What should matter most in the way powerful AI is governed?', art: 'chess', type: 'multi', max: 3, options: [o('oversight', 'Democratic oversight'), o('testing', 'Independent safety testing'), o('benefits', 'Sharing the benefits widely'), o('limits', 'Clear limits on harmful uses'), o('access', 'Access beyond a few large companies'), o('voice', 'A meaningful public voice')] },
-    { id: 'meaning', chapter: 'A life ahead', title: 'If you no longer needed paid work, how would that future feel to you?', art: 'hammock', type: 'slider', left: 'Like freedom', right: 'Like a loss of meaning' },
-    { id: 'meaning-anchor', chapter: 'A life ahead', title: 'What would give you a sense of purpose beyond being productive?', art: 'garden', type: 'multi', max: 3, branch: 'A little deeper on meaning', when: a => a.meaning >= 55 || a['self-worth'] >= 65, options: [o('care', 'Caring for other people'), o('create', 'Creating things'), o('learn', 'Learning and exploring'), o('challenge', 'Doing difficult things'), o('community', 'Belonging to a community'), o('nature', 'Spending time in nature'), o('work', 'Work I choose for myself')] },
-    { id: 'future', chapter: 'A life ahead', title: 'Which future would you most want to live in?', art: 'garden', type: 'single', options: [o('tool', 'AI mainly supports human work'), o('together', 'Humans and powerful AI work side by side'), o('leisure', 'AI does most work and people work far less'), o('beyond', 'AI becomes more capable than us in almost every field'), o('other', 'None of these feels right to me')] },
-    { id: 'builders', chapter: 'A life ahead', title: 'What is one thing you want AI’s builders to understand about being human?', art: 'letter', type: 'text', optional: true, placeholder: 'Something you hope they will remember…' }
+  const version=7, questionnaire='life-with-ai-2026-10-31';
+  const o=(value,label)=>({value,label});
+  const options=pairs=>pairs.map(([value,label])=>o(value,label));
+  const unsure=o('unsure','I’m not sure'), privateAnswer=o('private','Prefer not to answer');
+  const scale=(labels,extra=[])=>[...labels.map((label,i)=>o(String(i),label)),...extra,unsure];
+  const impact=extra=>scale(['Very negative','Somewhat negative','Neither positive nor negative','Somewhat positive','Very positive'],extra);
+  const comfort=()=>scale(['Very uncomfortable','Somewhat uncomfortable','Neither comfortable nor uncomfortable','Somewhat comfortable','Very comfortable']);
+  const frequency=extra=>scale(['Never','Rarely','Sometimes','Often','Very often'],extra);
+  const recent=a=>['daily','several','weekly','less'].includes(a['use-frequency']);
+  const working=a=>Array.isArray(a['life-context'])&&a['life-context'].some(v=>['employed','self-employed'].includes(v));
+  const single=(id,title,art,opts,more={})=>({id,title,art,type:'single',options:opts,...more});
+  const multi=(id,title,art,pairs,more={})=>({id,title,art,type:'multi',options:[...options(pairs),unsure],exclusive:['none','unsure','private','not-applicable'],...more});
+  const core=[
+    multi('feelings','When you think about AI becoming part of everyday life, which feelings come up?','feelings',[
+      ['curious','Curious'],['hopeful','Hopeful'],['excited','Excited'],['reassured','Reassured'],['uncertain','Uncertain'],['worried','Worried'],['overwhelmed','Overwhelmed'],['frustrated','Frustrated'],['indifferent','Indifferent'],['other','Something else']],{max:3}),
+    single('pace','How does the pace of AI development feel to you?','q-pace',options([['slow-much','Much too slow'],['slow-little','A little too slow'],['right','About right'],['fast-little','A little too fast'],['fast-much','Much too fast'],['unsure','I’m not sure']])),
+    single('use-frequency','In the past 30 days, how often have you deliberately used an AI tool?','calendar',options([['daily','Every day or almost every day'],['several','Several days a week'],['weekly','About once a week'],['less','Less than once a week'],['previous','Not in the past 30 days, but previously'],['never','Never'],['unsure','I’m not sure whether something I used counts']])),
+    multi('life-context','Which are part of your life at the moment?','desk',[
+      ['employed','Paid employment'],['self-employed','Self-employment'],['study','Study'],['looking','Looking for work'],['caring','Unpaid caring'],['retired','Retirement'],['unable','Unable to work'],['other','Something else'],['private','Prefer not to answer']],{optional:true}),
+    multi('uses','What have you used AI for in the past 30 days?','q-missed-tools',[
+      ['work','Work'],['learning','Studying or learning'],['writing','Writing or communicating'],['creative','Making images, music or other creative work'],['coding','Coding'],['home','Household organisation'],['shopping','Shopping or travel'],['money','Money matters'],['health','Physical health information'],['support','Emotional support'],['caring','Parenting or caring'],['entertainment','Entertainment'],['other','Something else']],{when:recent}),
+    multi('barriers','What, if anything, keeps you from using AI more often?','doors',[
+      ['enough','I already use it as much as I want'],['no-need','I don’t need it'],['myself','I prefer doing things myself'],['start','I don’t know where to start'],['trust','I don’t trust the answers'],['privacy','Privacy concerns'],['cost','Cost'],['access','Difficulty accessing or using the tools'],['rules','Rules at work or school'],['ethics','Ethical or environmental concerns'],['other','Something else'],['none','Nothing']],{exclusive:['enough','none','unsure']}),
+    multi('benefits','In the past 30 days, what has using AI helped you do?','q-work-changed',[
+      ['time','Save time'],['understand','Understand something'],['quality','Improve something I made'],['ideas','Come up with ideas'],['money','Spend less money'],['access','Do something I otherwise found difficult'],['supported','Feel supported'],['enjoy','Enjoy myself'],['other','Something else'],['none','None of these']],{when:recent}),
+    multi('drawbacks','In the past 30 days, which of these have happened when you used AI?','running',[
+      ['wrong','I received an answer I later found was wrong'],['fix','I spent extra time checking or fixing its output'],['privacy','I shared information I later regretted sharing'],['confidence','I felt less confident doing something without it'],['time','I spent longer using it than I intended'],['upset','Its response upset me'],['other','Something else went wrong'],['none','None of these']],{when:recent}),
+    single('personal-now','So far, what effect do you think AI has had on your life overall?','compass',impact([o('no-effect','I haven’t noticed an effect')])),
+    single('personal-future','Over the next three years, what effect do you expect AI to have on your life?','q-meaning-anchor',impact([o('no-effect','I don’t expect an effect')])),
+    single('checking','How confident are you that you can judge when an AI answer needs checking?','q-truth-support',scale(['Not at all confident','Slightly confident','Moderately confident','Very confident','Extremely confident'],[o('not-enough','I haven’t used AI enough to say')])),
+    single('choice','How much choice do you feel you have about whether AI is part of your everyday life?','unplugged',scale(['No choice','A little choice','Some choice','A lot of choice','Complete choice'])),
+    multi('support','What would help you feel better equipped for life with AI?','q-support',[
+      ['explain','Clearer explanations'],['lessons','Practical lessons'],['person','Someone I can ask for help'],['cost','More affordable tools'],['access','Tools that are easier for me to use'],['rules','Clearer rules at work or school'],['safeguards','Stronger safeguards'],['human','The option to use a human service'],['none','Nothing right now'],['other','Something else']],{max:3}),
+    single('alone','In the past 30 days, how often have you felt alone in how you feel about AI?','q-replace-worry',frequency([o('not-thought','I haven’t thought about AI'),privateAnswer]),{optional:true}),
+    multi('human-involvement','For which of these would you want a person involved, even if AI were available?','tea',[
+      ['medical','Medical care'],['emotional','Emotional support'],['teaching','Teaching'],['money','Important financial decisions'],['job','Decisions about my job'],['services','Public-service decisions affecting me'],['creative','Creative collaboration'],['care','Caring for someone I love'],['none','None of these'],['depends','It depends on the situation']],{exclusive:['none','depends','unsure']}),
+    single('privacy','How comfortable would you feel sharing personal information with an AI service to get more tailored help?','q-memory-boundary',[...comfort().slice(0,5),o('depends','It depends on the information'),unsure]),
+    multi('protections','Which protections would matter most to you when organisations use AI?','chess',[
+      ['told','Being told when AI is involved'],['data','Control over my personal information'],['appeal','A human I can appeal to'],['errors','Independent checks for errors'],['fairness','Checks for unfair treatment'],['responsibility','Clear responsibility when something goes wrong'],['opt-out','The option not to use AI'],['none','None of these'],['other','Something else']],{max:3}),
+    multi('priorities','Where would you most like AI to make a positive difference?','q-power-priority',[
+      ['health','Healthcare'],['education','Education'],['costs','Everyday costs'],['work','Working conditions'],['access','Accessibility and independence'],['care','Caring for people'],['services','Public services'],['science','Scientific discovery'],['environment','The environment'],['creative','Creative expression'],['other','Something else'],['none','Nowhere in particular']],{max:3}),
+    single('society-future','Over the next three years, what effect do you expect AI to have on society overall?','q-pressure-source',impact([o('no-effect','I don’t expect an effect')])),
+    single('extra-hour','Imagine AI gave you an extra hour each day, with no loss of income. What would you most want to do with it?','hammock',options([['people','Spend time with people'],['rest','Rest'],['outside','Exercise or get outdoors'],['make','Make something'],['learn','Learn something'],['care','Care for someone'],['earn','Earn more'],['admin','Catch up on life admin'],['other','Something else'],['unsure','I’m not sure']]))
   ];
-  // Ordered verbal choices preserve the existing numeric response protocol and branch thresholds.
-  const responseLabels = {
-  "keep-up": [
-    "Very easy",
-    "Fairly easy",
-    "Neither easy nor difficult",
-    "Fairly difficult",
-    "Very difficult"
-  ],
-  "future-picture": [
-    "Very clearly",
-    "Fairly clearly",
-    "Somewhat clearly",
-    "Not very clearly",
-    "Not at all clearly"
-  ],
-  "self-worth": [
-    "Not at all",
-    "A little",
-    "Somewhat",
-    "Quite a lot",
-    "A great deal"
-  ],
-  "choice-vs-control": [
-    "Definitely getting the best outcome",
-    "Leaning toward the best outcome",
-    "Both matter equally",
-    "Leaning toward making my own choice",
-    "Definitely making my own choice"
-  ],
-  "truth": [
-    "Not at all confident",
-    "Not very confident",
-    "Somewhat confident",
-    "Fairly confident",
-    "Very confident"
-  ],
-  "meaning": [
-    "Mostly freedom",
-    "More freedom than loss",
-    "An equal mix of both",
-    "More loss than freedom",
-    "Mostly a loss of meaning"
-  ]
-};
-  questions.forEach(q => { if(responseLabels[q.id]) q.responseOptions=responseLabels[q.id].map((label,index)=>({value:index*25,label})); });
-  const byId = Object.fromEntries(questions.map(q => [q.id, q]));
-  const route = answers => questions.filter(q => !q.when || q.when(answers));
-  function reconcile(answers) {
-    const clean = { ...answers };
-    for (let n = 0; n < questions.length; n++) {
-      const allowed = new Set(route(clean).map(q => q.id));
-      const removed = Object.keys(clean).filter(id => !allowed.has(id));
-      if (!removed.length) return clean;
-      removed.forEach(id => delete clean[id]);
-    }
-    return clean;
+  const modules=[
+    {id:'work',name:'Work and income',eligible:working,questions:[
+      multi('work-changes','In the past three months, what has changed at work that you believe is linked to AI?','q-work-pressure',[
+        ['time','Tasks take less time'],['output','More output is expected'],['responsibilities','New responsibilities'],['fewer','Fewer tasks are available'],['opportunities','New opportunities'],['hours','Changes to paid hours'],['earnings','Changes to earnings'],['none','No change']]),
+      single('work-income','Over the next three years, do you expect AI to make your ability to earn a living better or worse?','mirror',scale(['Much worse','Somewhat worse','Neither better nor worse','Somewhat better','Much better'],[o('no-effect','No effect')]))]},
+    {id:'learning',name:'Learning and skills',questions:[
+      single('learning-practice','When you use AI to learn something, how often do you try doing it yourself afterwards?','painting',scale(['Never','Rarely','Sometimes','Often','Always'],[o('not-used','I haven’t used it for learning')])),
+      single('learning-confidence','What effect, if any, has AI had on your confidence in learning something new?','mirror',scale(['Much less confident','Somewhat less confident','No effect','Somewhat more confident','Much more confident'],[o('not-used','I haven’t used it for learning')]))]},
+    {id:'health',name:'Health and wellbeing',questions:[
+      multi('health-uses','In the past three months, have you used AI for any of these?','q-health',[
+        ['information','Physical health information'],['appointment','Preparing for a medical appointment'],['understanding','Understanding health information'],['emotional','Emotional support'],['none','None of these'],['private','Prefer not to answer']],{optional:true}),
+      single('health-worry','How comfortable would you feel discussing a personal worry with an AI chatbot?','q-wellbeing',[...comfort(),privateAnswer],{optional:true})]},
+    {id:'relationships',name:'Relationships and caring',questions:[
+      single('relationships-talk','In the past three months, has time spent talking with AI changed how much you talk with other people?','q-connection',scale(['Much less','Somewhat less','No change','Somewhat more','Much more'],[o('not-used','I haven’t talked with AI'),privateAnswer]),{optional:true}),
+      multi('caring-tasks','For which caring tasks would you consider using AI?','garden',[
+        ['organising','Organising care'],['information','Explaining information'],['activities','Suggesting activities'],['communication','Helping with communication'],['companionship','Providing companionship'],['none','None'],['not-applicable','Not relevant to me']])]},
+    {id:'home-money',name:'Home and money',questions:[
+      single('home-effort','What effect has AI had on the effort it takes you to manage everyday tasks?','garden',scale(['Much more effort','Somewhat more effort','No effect','Somewhat less effort','Much less effort'],[o('not-used','I haven’t used it for this')])),
+      single('money-advice','How comfortable would you feel using AI advice when making an important money decision?','q-work-pressure',comfort())]},
+    {id:'creativity',name:'Creativity and identity',questions:[
+      single('creative-frequency','What effect has AI had on how often you make things for enjoyment?','painting',scale(['Much less often','Somewhat less often','No change','Somewhat more often','Much more often'],[o('not-applicable','I don’t do this')])),
+      single('identity','If AI could do something you take pride in better than you, how much would that change how you value yourself?','mirror',scale(['Not at all','A little','Somewhat','Quite a lot','A great deal'],[privateAnswer]),{optional:true})]},
+    {id:'public-life',name:'Information and public life',questions:[
+      single('information-check','In the past three months, how often have you checked something because you suspected it was AI-generated?','newspaper',frequency()),
+      single('human-review','If AI helped make an important public-service decision about you, how important would the right to a human review be?','q-work-pressure',scale(['Not at all important','Slightly important','Moderately important','Very important','Extremely important']))]},
+    {id:'fairness',name:'Fairness and the environment',questions:[
+      single('financial-benefits','Who do you expect to benefit most financially from AI over the next three years?','q-work-pressure',options([['few','Mainly a small number of people and organisations'],['even','Benefits spread fairly evenly'],['worse-off','Mainly people currently worse off'],['none','No substantial financial benefit'],['other','Another outcome'],['unsure','I’m not sure']])),
+      single('environment','How much should AI’s environmental impact influence decisions about where it is used?','garden',scale(['Not at all','A little','Somewhat','Quite a lot','A great deal']))]}
+  ];
+  modules.forEach(m=>m.questions.forEach(q=>q.module=m.id));
+  const countryCodes='AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW'.split(' ');
+  const regionNames=new Intl.DisplayNames(['en'],{type:'region'});
+  const profile=[
+    single('country','Which country or territory do you live in?','map',[...countryCodes.map(code=>o(code,regionNames.of(code))).sort((a,b)=>a.label.localeCompare(b.label)),o('other','Another country or territory'),privateAnswer],{type:'select',optional:true}),
+    single('age','What is your age group?','memory',options([['18-24','18–24'],['25-34','25–34'],['35-44','35–44'],['45-54','45–54'],['55-64','55–64'],['65-74','65–74'],['75+','75+'],['private','Prefer not to answer']]),{optional:true}),
+    single('finances','How comfortably does your household manage financially at the moment?','q-wallet',scale(['Very comfortably','Fairly comfortably','Just getting by','Finding it fairly difficult','Finding it very difficult'],[privateAnswer]),{optional:true}),
+    {id:'builders',title:'What is one thing you want the people shaping AI to understand about your life?',art:'letter',type:'text',optional:true,placeholder:'Something you hope they will understand…'}
+  ];
+  const questions=[...core,...modules.flatMap(m=>m.questions),...profile];
+  const byId=Object.fromEntries(questions.map(q=>[q.id,q]));
+  // Stable seeded shuffle: Back never rerolls a topic; eligibility depends only on life context.
+  function allocation(answers,seed=0){
+    let n=seed>>>0;
+    const random=()=>{n=(n+0x6D2B79F5)>>>0;let t=n;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};
+    const order=modules.map(m=>m.id);
+    for(let i=order.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+    const eligible=modules.filter(m=>!m.eligible||m.eligible(answers)).map(m=>m.id);
+    return {module:order.find(id=>eligible.includes(id)),eligible,probability:1/eligible.length,seed:seed>>>0,method:'seeded-shuffle-v1'};
   }
-  function hasAnswer(q, answer) {
-    if (answer === null) return !!q.optional;
-    if (q.type === 'slider') return Number.isFinite(answer) && answer >= 0 && answer <= 100;
-    if (q.type === 'text') return typeof answer === 'string' && answer.trim().length > 0;
-    if (q.type === 'multi') return Array.isArray(answer) && answer.length > 0 && (!q.max || answer.length <= q.max) && answer.every(v => q.options.some(o => o.value === v)) && (!answer.some(v => (q.exclusive || []).includes(v)) || answer.length === 1);
-    return q.options.some(o => o.value === answer);
+  const route=(answers,seed=0)=>{const topic=allocation(answers,seed).module;return questions.filter(q=>(!q.when||q.when(answers))&&(!q.module||q.module===topic));};
+  function reconcile(answers,seed=0){const allowed=new Set(route(answers,seed).map(q=>q.id));return Object.fromEntries(Object.entries(answers).filter(([id])=>allowed.has(id)));}
+  function hasAnswer(q,answer){
+    if(answer===null)return !!q.optional;
+    if(answer===undefined)return false;
+    if(q.type==='text')return typeof answer==='string'&&answer.trim().length>0&&answer.length<=4000;
+    if(q.type==='multi')return Array.isArray(answer)&&answer.length>0&&(!q.max||answer.length<=q.max)&&new Set(answer).size===answer.length&&answer.every(v=>q.options.some(o=>o.value===v))&&(!answer.some(v=>(q.exclusive||[]).includes(v))||answer.length===1);
+    return q.options.some(o=>o.value===answer);
   }
-  function selectMulti(q, current, value) {
-    const selected = Array.isArray(current) ? current : [];
-    if (selected.includes(value)) return { values: selected.filter(v => v !== value), limited: false };
-    if ((q.exclusive || []).includes(value)) return { values: [value], limited: false };
-    const values = selected.filter(v => !(q.exclusive || []).includes(v));
-    if (q.max && values.length >= q.max) return { values: selected, limited: true };
-    return { values: [...values, value], limited: false };
+  function selectMulti(q,current,value){const selected=Array.isArray(current)?current:[];if(selected.includes(value))return {values:selected.filter(v=>v!==value),limited:false};if((q.exclusive||[]).includes(value))return {values:[value],limited:false};const values=selected.filter(v=>!(q.exclusive||[]).includes(v));if(q.max&&values.length>=q.max)return {values:selected,limited:true};return {values:[...values,value],limited:false};}
+  function label(q,answer){if(answer===null||answer===undefined)return 'Skipped';if(q.type==='text')return answer;return (Array.isArray(answer)?answer:[answer]).map(v=>q.options.find(o=>o.value===v)?.label||v).join(' · ');}
+  function report(input,seed=0){
+    const answers=reconcile(input,seed),feelings=answers.feelings||[];
+    const positive=feelings.some(f=>['curious','hopeful','excited','reassured'].includes(f));
+    const negative=feelings.some(f=>['uncertain','worried','overwhelmed','frustrated'].includes(f));
+    const title=positive&&negative?'Possibility, with mixed feelings.':positive?'Curious about what comes next.':negative?'Making room for how change feels.':'A perspective of my own.';
+    return {title,dimensions:[],answers,route:route(answers,seed).map(q=>q.id),perspectives:[
+      ['EVERYDAY AI',label(byId['use-frequency'],answers['use-frequency'])],
+      ['LIFE SO FAR',label(byId['personal-now'],answers['personal-now'])],
+      ['LOOKING AHEAD',label(byId['personal-future'],answers['personal-future'])]
+    ]};
   }
-  function label(q, answer) {
-    if (answer === null || answer === undefined) return 'Skipped';
-    if (q.type === 'slider') return q.responseOptions?.find(option => option.value === answer)?.label || `${answer} / 100 · ${q.left} ↔ ${q.right}`;
-    if (q.type === 'text') return answer;
-    return (Array.isArray(answer) ? answer : [answer]).map(v => q.options.find(o => o.value === v)?.label || v).join(' · ');
-  }
-  const numeric = (a, id) => typeof a[id] === 'number' ? a[id] : null;
-  const lookup = (a, id, values) => a[id] in values ? values[a[id]] : null;
-  const mean = entries => { const available = entries.filter(v => v !== null); return available.length ? Math.round(available.reduce((a, b) => a + b, 0) / available.length) : null; };
-  function report(input) {
-    const a = reconcile(input);
-    const pressure = mean([numeric(a, 'keep-up'), lookup(a, 'pace', {slow: 0, right: 25, uneasy: 55, fast: 80, danger: 100})]);
-    const reliance = lookup(a, 'dependency', {none: 0, little: 25, some: 55, much: 80, essential: 100});
-    const ownership = numeric(a, 'choice-vs-control');
-    const roles = Array.isArray(a['human-boundary']) ? a['human-boundary'] : null;
-    const presence = mean([roles ? (roles.includes('none') ? 0 : roles.length / 7 * 100) : null, lookup(a, 'art-value', {authorship: 100, feeling: 0})]);
-    const feelings = a.feelings || [];
-    const positive = feelings.some(v => ['hope', 'excitement', 'curiosity', 'optimism'].includes(v));
-    const uneasy = feelings.some(v => ['anxiety', 'fear', 'overwhelm', 'powerlessness'].includes(v));
-    let title = 'There is more than one feeling here.';
-    let summary = 'Your answers make room for more than one way of thinking about AI. Your fieldnotes bring those preferences together without reducing you to a single label.';
-    if (positive && uneasy) { title = 'Hope, with a few things held close.'; summary = 'You chose both possibility and unease. Those feelings can coexist: being interested in what AI offers does not mean feeling ready for every change it brings.'; }
-    else if (positive && ownership >= 65) { title = 'Open to possibility. Still the author.'; summary = 'You see something to be curious or hopeful about, while placing a high value on making your own decisions. Your ideal future leaves people room to choose.'; }
-    else if (pressure >= 65) { title = 'A little more room to catch up.'; summary = 'The pace of change feels demanding to you. Your answers point toward a future that makes space for people to understand, adapt and have a say.'; }
-    else if (presence >= 65) { title = 'Some things are better with a person.'; summary = 'You give human presence or authorship considerable weight. Capability is part of the story, but your answers suggest it is not the whole story.'; }
-    else if (reliance >= 65) { title = 'AI is already part of the everyday.'; summary = 'AI’s absence would make some of your current activities difficult. Your answers start from lived usefulness, alongside the choices and boundaries you want to keep.'; }
-    else if (positive) { title = 'Curious about the life ahead.'; summary = 'Curiosity, hope or excitement appears in your answers. The rest of your fieldnotes show the particular conditions and preferences that sit alongside that openness.'; }
-    const dimensions = [
-      { key: 'pressure', name: 'Change pressure', value: pressure, left: 'Comfortable pace', right: 'Hard to keep up', source: ['pace', 'keep-up'], explanation: 'A simple average of your pace answer (0, 25, 55, 80 or 100) and your keep-up answer, scored from 0 to 100 in five steps. Higher means more pressure from change.' },
-      { key: 'reliance', name: 'Everyday reliance', value: reliance, left: 'Light touch', right: 'Hard to do without', source: ['dependency'], explanation: 'Your answer about losing access to AI, mapped in order to 0, 25, 55, 80 or 100. Higher means AI is harder for you to do without.' },
-      { key: 'ownership', name: 'Decision ownership', value: ownership, left: 'Best outcome', right: 'My own choice', source: ['choice-vs-control'], explanation: 'Your decision preference, scored from 0 to 100 in five steps. Higher means you put more weight on the decision feeling truly yours.' },
-      { key: 'presence', name: 'Human presence', value: presence, left: 'Capability first', right: 'People matter', source: ['human-boundary', 'art-value'], explanation: 'An average of the proportion of seven roles where you preferred a human, and your art answer (human authorship = 100; feeling created = 0). A descriptive index, not a validated scale.' }
-    ];
-    const tensions = [];
-    if (positive && uneasy) tensions.push({ title: 'Possibility & unease', body: `You selected ${label(byId.feelings, a.feelings).toLowerCase()}. Your emotional picture includes both an invitation and a reason to be careful.` });
-    if (reliance >= 55 && ['pressure', 'little', 'none'].includes(a.agency)) tensions.push({ title: 'Useful, but not entirely optional', body: 'AI makes a meaningful difference to your everyday life, while choosing whether to use it feels increasingly constrained.' });
-    if (ownership >= 65) tensions.push({ title: 'An answer is not the same as a choice', body: 'Even if AI could find the best outcome, you leaned toward knowing the decision was yours. Agency carries value beyond efficiency.' });
-    if (a['self-worth'] >= 65) tensions.push({ title: 'Capability & personal worth', body: 'Being outperformed would affect how you value yourself. That answer makes the question of human worth especially important in your fieldnotes.' });
-    if (a.meaning <= 35) tensions.push({ title: 'Time back, life ahead', body: 'A life without the need for paid work feels closer to freedom for you. That opens a different question: what would you choose to do with that time?' });
-    else if (a.meaning >= 65) tensions.push({ title: 'Less work, still a reason to get up', body: 'Losing the need for paid work feels closer to a loss of meaning for you. Purpose matters alongside the promise of time saved.' });
-    if (a['control-worry']) tensions.push({ title: a['control-worry'] === 'owners' ? 'Who holds the keys?' : 'Keeping power answerable', body: a['control-worry'] === 'owners' ? 'You were more concerned about a few people controlling powerful AI than about AI’s own power. Concentration matters in the future you imagine.' : 'You were more concerned about systems becoming too powerful to control. The ability to keep AI understandable and answerable matters in the future you imagine.' });
-    const priorities = ['work-pressure', 'support', 'human-boundary', 'memory-boundary', 'power-priority', 'meaning-anchor'].filter(id => Array.isArray(a[id]) && a[id].length).map(id => ({question: byId[id].title, labels: a[id].map(v => byId[id].options.find(o => o.value === v).label)}));
-    return { title, summary, dimensions, tensions: tensions.slice(0, 3), priorities, future: a.future ? label(byId.future, a.future) : null, voice: typeof a.builders === 'string' ? a.builders : null, answers: a, route: route(a).map(q => q.id) };
-  }
-  const api = { questions, byId, route, reconcile, hasAnswer, selectMulti, label, report };
-  if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  else root.SurveyModel = api;
-})(typeof window !== 'undefined' ? window : globalThis);
+  const api={version,questionnaire,questions,byId,modules,allocation,route,reconcile,hasAnswer,selectMulti,label,report,recent};
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.SurveyModel=api;
+})(typeof window!=='undefined'?window:globalThis);

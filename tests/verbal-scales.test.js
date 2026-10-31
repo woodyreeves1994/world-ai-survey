@@ -1,6 +1,6 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const M=require('../survey-model');
+const M=require('../database/legacy-model-v6');
 
 test('all six numeric questions offer five labelled, valid responses',()=>{
   const questions=M.questions.filter(q=>q.type==='slider');

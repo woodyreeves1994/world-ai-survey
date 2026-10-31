@@ -18,3 +18,7 @@ The data protocol remains version 6; this is a visual release, displayed as Surv
 # Release 12 additions
 
 The existing 17 illustrations are preserved. Eleven new original drawings replace repeated uses: pace, work changes, work fairness, replacement worries, support, missed tools, sources of pressure, memory boundaries, checking sources, public priorities, and purpose. Their generation prompts are in `assets/ink/question-prompts-v12.json`; the editable two-colour paths are `assets/ink/q-*.svg`. `question-illustrations.js` maps only those eleven question IDs. The remaining questions retain their existing artwork.
+
+## Life with AI additions
+
+Four original bitmap illustrations were made with the built-in image-generation tool, then traced with VTracer into assets/ink/q-wallet.svg, q-health.svg, q-wellbeing.svg and q-connection.svg. The final prompts are in assets/ink/question-prompts-v13.json. life-illustrations.js supplies those paths; the questionnaire chooses artwork directly by question. No route repeats an illustration. Existing drawings are retained. The current light theme uses DM Sans and Lora; older typography notes above describe historical versions.

@@ -2,6 +2,8 @@
 
 [Open Telescopic](https://woodyreeves1994.github.io/world-ai-survey/) · [Open the AI survey](https://woodyreeves1994.github.io/world-ai-survey/survey.html) · [View study results](https://woodyreeves1994.github.io/world-ai-survey/results-admin.html)
 
+Visual release 13 introduces the Life with AI questionnaire (response protocol V7): a 40-question bank with 23 or 26 questions per participant. Recent users receive usage, benefit and drawback questions; everyone receives one stable, randomly allocated two-question topic section. Work is eligible only for paid employment or self-employment. Optional life context, age, country/territory, household finances and reflection can be skipped. The existing paper theme, wordmark, large buttons and 340ms full-screen swipes are retained. Four new original generated-and-traced drawings cover finances, health, emotional support and conversation; each possible route uses distinct illustrations. Personal share cards summarise direct answers instead of synthetic scores.
+
 ## Telescopic landing page
 
 Visual release 12 preserves the 17 existing drawings and adds 11 original traced illustrations only for repeated question artwork. All 28 questions, including conditional follow-ups, now resolve to a distinct illustration. `question-illustrations.js` supplies the additions without changing the survey model or response protocol. `swipe.css` provides 340ms full-viewport transitions with a reversed Back direction, a full-width fallback for older browsers, navigation locking and reduced-motion support.

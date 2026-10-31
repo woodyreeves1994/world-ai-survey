@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const M=require('../survey-model');
-const {validateSubmission}=require('../database/validation');
+const M=require('../database/legacy-model-v6');
+const {validateSubmission}=require('../database/legacy-validation-v6');
 function valid(){const answers={};for(let i=0;i<35;i++){const q=M.route(answers).find(q=>!M.hasAnswer(q,answers[q.id]));if(!q)break;answers[q.id]=q.optional?null:q.type==='slider'?50:q.id==='context'?'neither':q.type==='multi'?[q.options[0].value]:q.options[0].value;}return {version:6,consent:true,receipt:'72522c2b-7db0-400c-9e35-14e7f2b981d7',responses:answers,durationSeconds:250};}
 test('complete submissions are recomputed from answers, not client scores',()=>{const body=valid();body.indices={pressure:999};body.route=['fake'];body.is_test=true;const result=validateSubmission(body,M);assert.equal(result.error,undefined);assert.equal(result.record.indices.pressure,25);assert.equal(result.record.is_test,false);assert.equal(result.record.route.length,18);assert.equal(result.record.answer_count,16);});
 test('consent is required and incomplete responses are rejected',()=>{const body=valid();body.consent=false;assert.ok(validateSubmission(body,M).error);body.consent=true;delete body.responses.pace;assert.ok(validateSubmission(body,M).error);});

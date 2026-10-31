@@ -1,0 +1,2719 @@
+{
+  "version": 7,
+  "questionnaire": "life-with-ai-2026-10-31",
+  "questions": [
+    {
+      "id": "feelings",
+      "title": "When you think about AI becoming part of everyday life, which feelings come up?",
+      "art": "feelings",
+      "type": "multi",
+      "options": [
+        {
+          "value": "curious",
+          "label": "Curious"
+        },
+        {
+          "value": "hopeful",
+          "label": "Hopeful"
+        },
+        {
+          "value": "excited",
+          "label": "Excited"
+        },
+        {
+          "value": "reassured",
+          "label": "Reassured"
+        },
+        {
+          "value": "uncertain",
+          "label": "Uncertain"
+        },
+        {
+          "value": "worried",
+          "label": "Worried"
+        },
+        {
+          "value": "overwhelmed",
+          "label": "Overwhelmed"
+        },
+        {
+          "value": "frustrated",
+          "label": "Frustrated"
+        },
+        {
+          "value": "indifferent",
+          "label": "Indifferent"
+        },
+        {
+          "value": "other",
+          "label": "Something else"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "unsure",
+        "private",
+        "not-applicable"
+      ],
+      "max": 3,
+      "condition": "all participants"
+    },
+    {
+      "id": "pace",
+      "title": "How does the pace of AI development feel to you?",
+      "art": "q-pace",
+      "type": "single",
+      "options": [
+        {
+          "value": "slow-much",
+          "label": "Much too slow"
+        },
+        {
+          "value": "slow-little",
+          "label": "A little too slow"
+        },
+        {
+          "value": "right",
+          "label": "About right"
+        },
+        {
+          "value": "fast-little",
+          "label": "A little too fast"
+        },
+        {
+          "value": "fast-much",
+          "label": "Much too fast"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "condition": "all participants"
+    },
+    {
+      "id": "use-frequency",
+      "title": "In the past 30 days, how often have you deliberately used an AI tool?",
+      "art": "calendar",
+      "type": "single",
+      "options": [
+        {
+          "value": "daily",
+          "label": "Every day or almost every day"
+        },
+        {
+          "value": "several",
+          "label": "Several days a week"
+        },
+        {
+          "value": "weekly",
+          "label": "About once a week"
+        },
+        {
+          "value": "less",
+          "label": "Less than once a week"
+        },
+        {
+          "value": "previous",
+          "label": "Not in the past 30 days, but previously"
+        },
+        {
+          "value": "never",
+          "label": "Never"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure whether something I used counts"
+        }
+      ],
+      "condition": "all participants"
+    },
+    {
+      "id": "life-context",
+      "title": "Which are part of your life at the moment?",
+      "art": "desk",
+      "type": "multi",
+      "options": [
+        {
+          "value": "employed",
+          "label": "Paid employment"
+        },
+        {
+          "value": "self-employed",
+          "label": "Self-employment"
+        },
+        {
+          "value": "study",
+          "label": "Study"
+        },
+        {
+          "value": "looking",
+          "label": "Looking for work"
+        },
+        {
+          "value": "caring",
+          "label": "Unpaid caring"
+        },
+        {
+          "value": "retired",
+          "label": "Retirement"
+        },
+        {
+          "value": "unable",
+          "label": "Unable to work"
+        },
+        {
+          "value": "other",
+          "label": "Something else"
+        },
+        {
+          "value": "private",
+          "label": "Prefer not to answer"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "unsure",
+        "private",
+        "not-applicable"
+      ],
+      "optional": true,
+      "condition": "all participants"
+    },
+    {
+      "id": "uses",
+      "title": "What have you used AI for in the past 30 days?",
+      "art": "q-missed-tools",
+      "type": "multi",
+      "options": [
+        {
+          "value": "work",
+          "label": "Work"
+        },
+        {
+          "value": "learning",
+          "label": "Studying or learning"
+        },
+        {
+          "value": "writing",
+          "label": "Writing or communicating"
+        },
+        {
+          "value": "creative",
+          "label": "Making images, music or other creative work"
+        },
+        {
+          "value": "coding",
+          "label": "Coding"
+        },
+        {
+          "value": "home",
+          "label": "Household organisation"
+        },
+        {
+          "value": "shopping",
+          "label": "Shopping or travel"
+        },
+        {
+          "value": "money",
+          "label": "Money matters"
+        },
+        {
+          "value": "health",
+          "label": "Physical health information"
+        },
+        {
+          "value": "support",
+          "label": "Emotional support"
+        },
+        {
+          "value": "caring",
+          "label": "Parenting or caring"
+        },
+        {
+          "value": "entertainment",
+          "label": "Entertainment"
+        },
+        {
+          "value": "other",
+          "label": "Something else"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "unsure",
+        "private",
+        "not-applicable"
+      ],
+      "condition": "recent AI use in last 30 days"
+    },
+    {
+      "id": "barriers",
+      "title": "What, if anything, keeps you from using AI more often?",
+      "art": "doors",
+      "type": "multi",
+      "options": [
+        {
+          "value": "enough",
+          "label": "I already use it as much as I want"
+        },
+        {
+          "value": "no-need",
+          "label": "I don’t need it"
+        },
+        {
+          "value": "myself",
+          "label": "I prefer doing things myself"
+        },
+        {
+          "value": "start",
+          "label": "I don’t know where to start"
+        },
+        {
+          "value": "trust",
+          "label": "I don’t trust the answers"
+        },
+        {
+          "value": "privacy",
+          "label": "Privacy concerns"
+        },
+        {
+          "value": "cost",
+          "label": "Cost"
+        },
+        {
+          "value": "access",
+          "label": "Difficulty accessing or using the tools"
+        },
+        {
+          "value": "rules",
+          "label": "Rules at work or school"
+        },
+        {
+          "value": "ethics",
+          "label": "Ethical or environmental concerns"
+        },
+        {
+          "value": "other",
+          "label": "Something else"
+        },
+        {
+          "value": "none",
+          "label": "Nothing"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "enough",
+        "none",
+        "unsure"
+      ],
+      "condition": "all participants"
+    },
+    {
+      "id": "benefits",
+      "title": "In the past 30 days, what has using AI helped you do?",
+      "art": "q-work-changed",
+      "type": "multi",
+      "options": [
+        {
+          "value": "time",
+          "label": "Save time"
+        },
+        {
+          "value": "understand",
+          "label": "Understand something"
+        },
+        {
+          "value": "quality",
+          "label": "Improve something I made"
+        },
+        {
+          "value": "ideas",
+          "label": "Come up with ideas"
+        },
+        {
+          "value": "money",
+          "label": "Spend less money"
+        },
+        {
+          "value": "access",
+          "label": "Do something I otherwise found difficult"
+        },
+        {
+          "value": "supported",
+          "label": "Feel supported"
+        },
+        {
+          "value": "enjoy",
+          "label": "Enjoy myself"
+        },
+        {
+          "value": "other",
+          "label": "Something else"
+        },
+        {
+          "value": "none",
+          "label": "None of these"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "unsure",
+        "private",
+        "not-applicable"
+      ],
+      "condition": "recent AI use in last 30 days"
+    },
+    {
+      "id": "drawbacks",
+      "title": "In the past 30 days, which of these have happened when you used AI?",
+      "art": "running",
+      "type": "multi",
+      "options": [
+        {
+          "value": "wrong",
+          "label": "I received an answer I later found was wrong"
+        },
+        {
+          "value": "fix",
+          "label": "I spent extra time checking or fixing its output"
+        },
+        {
+          "value": "privacy",
+          "label": "I shared information I later regretted sharing"
+        },
+        {
+          "value": "confidence",
+          "label": "I felt less confident doing something without it"
+        },
+        {
+          "value": "time",
+          "label": "I spent longer using it than I intended"
+        },
+        {
+          "value": "upset",
+          "label": "Its response upset me"
+        },
+        {
+          "value": "other",
+          "label": "Something else went wrong"
+        },
+        {
+          "value": "none",
+          "label": "None of these"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "unsure",
+        "private",
+        "not-applicable"
+      ],
+      "condition": "recent AI use in last 30 days"
+    },
+    {
+      "id": "personal-now",
+      "title": "So far, what effect do you think AI has had on your life overall?",
+      "art": "compass",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Very negative"
+        },
+        {
+          "value": "1",
+          "label": "Somewhat negative"
+        },
+        {
+          "value": "2",
+          "label": "Neither positive nor negative"
+        },
+        {
+          "value": "3",
+          "label": "Somewhat positive"
+        },
+        {
+          "value": "4",
+          "label": "Very positive"
+        },
+        {
+          "value": "no-effect",
+          "label": "I haven’t noticed an effect"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "condition": "all participants"
+    },
+    {
+      "id": "personal-future",
+      "title": "Over the next three years, what effect do you expect AI to have on your life?",
+      "art": "q-meaning-anchor",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Very negative"
+        },
+        {
+          "value": "1",
+          "label": "Somewhat negative"
+        },
+        {
+          "value": "2",
+          "label": "Neither positive nor negative"
+        },
+        {
+          "value": "3",
+          "label": "Somewhat positive"
+        },
+        {
+          "value": "4",
+          "label": "Very positive"
+        },
+        {
+          "value": "no-effect",
+          "label": "I don’t expect an effect"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "condition": "all participants"
+    },
+    {
+      "id": "checking",
+      "title": "How confident are you that you can judge when an AI answer needs checking?",
+      "art": "q-truth-support",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Not at all confident"
+        },
+        {
+          "value": "1",
+          "label": "Slightly confident"
+        },
+        {
+          "value": "2",
+          "label": "Moderately confident"
+        },
+        {
+          "value": "3",
+          "label": "Very confident"
+        },
+        {
+          "value": "4",
+          "label": "Extremely confident"
+        },
+        {
+          "value": "not-enough",
+          "label": "I haven’t used AI enough to say"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "condition": "all participants"
+    },
+    {
+      "id": "choice",
+      "title": "How much choice do you feel you have about whether AI is part of your everyday life?",
+      "art": "unplugged",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "No choice"
+        },
+        {
+          "value": "1",
+          "label": "A little choice"
+        },
+        {
+          "value": "2",
+          "label": "Some choice"
+        },
+        {
+          "value": "3",
+          "label": "A lot of choice"
+        },
+        {
+          "value": "4",
+          "label": "Complete choice"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "condition": "all participants"
+    },
+    {
+      "id": "support",
+      "title": "What would help you feel better equipped for life with AI?",
+      "art": "q-support",
+      "type": "multi",
+      "options": [
+        {
+          "value": "explain",
+          "label": "Clearer explanations"
+        },
+        {
+          "value": "lessons",
+          "label": "Practical lessons"
+        },
+        {
+          "value": "person",
+          "label": "Someone I can ask for help"
+        },
+        {
+          "value": "cost",
+          "label": "More affordable tools"
+        },
+        {
+          "value": "access",
+          "label": "Tools that are easier for me to use"
+        },
+        {
+          "value": "rules",
+          "label": "Clearer rules at work or school"
+        },
+        {
+          "value": "safeguards",
+          "label": "Stronger safeguards"
+        },
+        {
+          "value": "human",
+          "label": "The option to use a human service"
+        },
+        {
+          "value": "none",
+          "label": "Nothing right now"
+        },
+        {
+          "value": "other",
+          "label": "Something else"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "unsure",
+        "private",
+        "not-applicable"
+      ],
+      "max": 3,
+      "condition": "all participants"
+    },
+    {
+      "id": "alone",
+      "title": "In the past 30 days, how often have you felt alone in how you feel about AI?",
+      "art": "q-replace-worry",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Never"
+        },
+        {
+          "value": "1",
+          "label": "Rarely"
+        },
+        {
+          "value": "2",
+          "label": "Sometimes"
+        },
+        {
+          "value": "3",
+          "label": "Often"
+        },
+        {
+          "value": "4",
+          "label": "Very often"
+        },
+        {
+          "value": "not-thought",
+          "label": "I haven’t thought about AI"
+        },
+        {
+          "value": "private",
+          "label": "Prefer not to answer"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "optional": true,
+      "condition": "all participants"
+    },
+    {
+      "id": "human-involvement",
+      "title": "For which of these would you want a person involved, even if AI were available?",
+      "art": "tea",
+      "type": "multi",
+      "options": [
+        {
+          "value": "medical",
+          "label": "Medical care"
+        },
+        {
+          "value": "emotional",
+          "label": "Emotional support"
+        },
+        {
+          "value": "teaching",
+          "label": "Teaching"
+        },
+        {
+          "value": "money",
+          "label": "Important financial decisions"
+        },
+        {
+          "value": "job",
+          "label": "Decisions about my job"
+        },
+        {
+          "value": "services",
+          "label": "Public-service decisions affecting me"
+        },
+        {
+          "value": "creative",
+          "label": "Creative collaboration"
+        },
+        {
+          "value": "care",
+          "label": "Caring for someone I love"
+        },
+        {
+          "value": "none",
+          "label": "None of these"
+        },
+        {
+          "value": "depends",
+          "label": "It depends on the situation"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "depends",
+        "unsure"
+      ],
+      "condition": "all participants"
+    },
+    {
+      "id": "privacy",
+      "title": "How comfortable would you feel sharing personal information with an AI service to get more tailored help?",
+      "art": "q-memory-boundary",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Very uncomfortable"
+        },
+        {
+          "value": "1",
+          "label": "Somewhat uncomfortable"
+        },
+        {
+          "value": "2",
+          "label": "Neither comfortable nor uncomfortable"
+        },
+        {
+          "value": "3",
+          "label": "Somewhat comfortable"
+        },
+        {
+          "value": "4",
+          "label": "Very comfortable"
+        },
+        {
+          "value": "depends",
+          "label": "It depends on the information"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "condition": "all participants"
+    },
+    {
+      "id": "protections",
+      "title": "Which protections would matter most to you when organisations use AI?",
+      "art": "chess",
+      "type": "multi",
+      "options": [
+        {
+          "value": "told",
+          "label": "Being told when AI is involved"
+        },
+        {
+          "value": "data",
+          "label": "Control over my personal information"
+        },
+        {
+          "value": "appeal",
+          "label": "A human I can appeal to"
+        },
+        {
+          "value": "errors",
+          "label": "Independent checks for errors"
+        },
+        {
+          "value": "fairness",
+          "label": "Checks for unfair treatment"
+        },
+        {
+          "value": "responsibility",
+          "label": "Clear responsibility when something goes wrong"
+        },
+        {
+          "value": "opt-out",
+          "label": "The option not to use AI"
+        },
+        {
+          "value": "none",
+          "label": "None of these"
+        },
+        {
+          "value": "other",
+          "label": "Something else"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "unsure",
+        "private",
+        "not-applicable"
+      ],
+      "max": 3,
+      "condition": "all participants"
+    },
+    {
+      "id": "priorities",
+      "title": "Where would you most like AI to make a positive difference?",
+      "art": "q-power-priority",
+      "type": "multi",
+      "options": [
+        {
+          "value": "health",
+          "label": "Healthcare"
+        },
+        {
+          "value": "education",
+          "label": "Education"
+        },
+        {
+          "value": "costs",
+          "label": "Everyday costs"
+        },
+        {
+          "value": "work",
+          "label": "Working conditions"
+        },
+        {
+          "value": "access",
+          "label": "Accessibility and independence"
+        },
+        {
+          "value": "care",
+          "label": "Caring for people"
+        },
+        {
+          "value": "services",
+          "label": "Public services"
+        },
+        {
+          "value": "science",
+          "label": "Scientific discovery"
+        },
+        {
+          "value": "environment",
+          "label": "The environment"
+        },
+        {
+          "value": "creative",
+          "label": "Creative expression"
+        },
+        {
+          "value": "other",
+          "label": "Something else"
+        },
+        {
+          "value": "none",
+          "label": "Nowhere in particular"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "unsure",
+        "private",
+        "not-applicable"
+      ],
+      "max": 3,
+      "condition": "all participants"
+    },
+    {
+      "id": "society-future",
+      "title": "Over the next three years, what effect do you expect AI to have on society overall?",
+      "art": "q-pressure-source",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Very negative"
+        },
+        {
+          "value": "1",
+          "label": "Somewhat negative"
+        },
+        {
+          "value": "2",
+          "label": "Neither positive nor negative"
+        },
+        {
+          "value": "3",
+          "label": "Somewhat positive"
+        },
+        {
+          "value": "4",
+          "label": "Very positive"
+        },
+        {
+          "value": "no-effect",
+          "label": "I don’t expect an effect"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "condition": "all participants"
+    },
+    {
+      "id": "extra-hour",
+      "title": "Imagine AI gave you an extra hour each day, with no loss of income. What would you most want to do with it?",
+      "art": "hammock",
+      "type": "single",
+      "options": [
+        {
+          "value": "people",
+          "label": "Spend time with people"
+        },
+        {
+          "value": "rest",
+          "label": "Rest"
+        },
+        {
+          "value": "outside",
+          "label": "Exercise or get outdoors"
+        },
+        {
+          "value": "make",
+          "label": "Make something"
+        },
+        {
+          "value": "learn",
+          "label": "Learn something"
+        },
+        {
+          "value": "care",
+          "label": "Care for someone"
+        },
+        {
+          "value": "earn",
+          "label": "Earn more"
+        },
+        {
+          "value": "admin",
+          "label": "Catch up on life admin"
+        },
+        {
+          "value": "other",
+          "label": "Something else"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "condition": "all participants"
+    },
+    {
+      "id": "work-changes",
+      "title": "In the past three months, what has changed at work that you believe is linked to AI?",
+      "art": "q-work-pressure",
+      "type": "multi",
+      "options": [
+        {
+          "value": "time",
+          "label": "Tasks take less time"
+        },
+        {
+          "value": "output",
+          "label": "More output is expected"
+        },
+        {
+          "value": "responsibilities",
+          "label": "New responsibilities"
+        },
+        {
+          "value": "fewer",
+          "label": "Fewer tasks are available"
+        },
+        {
+          "value": "opportunities",
+          "label": "New opportunities"
+        },
+        {
+          "value": "hours",
+          "label": "Changes to paid hours"
+        },
+        {
+          "value": "earnings",
+          "label": "Changes to earnings"
+        },
+        {
+          "value": "none",
+          "label": "No change"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "unsure",
+        "private",
+        "not-applicable"
+      ],
+      "module": "work",
+      "condition": "allocated topic: work"
+    },
+    {
+      "id": "work-income",
+      "title": "Over the next three years, do you expect AI to make your ability to earn a living better or worse?",
+      "art": "mirror",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Much worse"
+        },
+        {
+          "value": "1",
+          "label": "Somewhat worse"
+        },
+        {
+          "value": "2",
+          "label": "Neither better nor worse"
+        },
+        {
+          "value": "3",
+          "label": "Somewhat better"
+        },
+        {
+          "value": "4",
+          "label": "Much better"
+        },
+        {
+          "value": "no-effect",
+          "label": "No effect"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "module": "work",
+      "condition": "allocated topic: work"
+    },
+    {
+      "id": "learning-practice",
+      "title": "When you use AI to learn something, how often do you try doing it yourself afterwards?",
+      "art": "painting",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Never"
+        },
+        {
+          "value": "1",
+          "label": "Rarely"
+        },
+        {
+          "value": "2",
+          "label": "Sometimes"
+        },
+        {
+          "value": "3",
+          "label": "Often"
+        },
+        {
+          "value": "4",
+          "label": "Always"
+        },
+        {
+          "value": "not-used",
+          "label": "I haven’t used it for learning"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "module": "learning",
+      "condition": "allocated topic: learning"
+    },
+    {
+      "id": "learning-confidence",
+      "title": "What effect, if any, has AI had on your confidence in learning something new?",
+      "art": "mirror",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Much less confident"
+        },
+        {
+          "value": "1",
+          "label": "Somewhat less confident"
+        },
+        {
+          "value": "2",
+          "label": "No effect"
+        },
+        {
+          "value": "3",
+          "label": "Somewhat more confident"
+        },
+        {
+          "value": "4",
+          "label": "Much more confident"
+        },
+        {
+          "value": "not-used",
+          "label": "I haven’t used it for learning"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "module": "learning",
+      "condition": "allocated topic: learning"
+    },
+    {
+      "id": "health-uses",
+      "title": "In the past three months, have you used AI for any of these?",
+      "art": "q-health",
+      "type": "multi",
+      "options": [
+        {
+          "value": "information",
+          "label": "Physical health information"
+        },
+        {
+          "value": "appointment",
+          "label": "Preparing for a medical appointment"
+        },
+        {
+          "value": "understanding",
+          "label": "Understanding health information"
+        },
+        {
+          "value": "emotional",
+          "label": "Emotional support"
+        },
+        {
+          "value": "none",
+          "label": "None of these"
+        },
+        {
+          "value": "private",
+          "label": "Prefer not to answer"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "unsure",
+        "private",
+        "not-applicable"
+      ],
+      "optional": true,
+      "module": "health",
+      "condition": "allocated topic: health"
+    },
+    {
+      "id": "health-worry",
+      "title": "How comfortable would you feel discussing a personal worry with an AI chatbot?",
+      "art": "q-wellbeing",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Very uncomfortable"
+        },
+        {
+          "value": "1",
+          "label": "Somewhat uncomfortable"
+        },
+        {
+          "value": "2",
+          "label": "Neither comfortable nor uncomfortable"
+        },
+        {
+          "value": "3",
+          "label": "Somewhat comfortable"
+        },
+        {
+          "value": "4",
+          "label": "Very comfortable"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        },
+        {
+          "value": "private",
+          "label": "Prefer not to answer"
+        }
+      ],
+      "optional": true,
+      "module": "health",
+      "condition": "allocated topic: health"
+    },
+    {
+      "id": "relationships-talk",
+      "title": "In the past three months, has time spent talking with AI changed how much you talk with other people?",
+      "art": "q-connection",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Much less"
+        },
+        {
+          "value": "1",
+          "label": "Somewhat less"
+        },
+        {
+          "value": "2",
+          "label": "No change"
+        },
+        {
+          "value": "3",
+          "label": "Somewhat more"
+        },
+        {
+          "value": "4",
+          "label": "Much more"
+        },
+        {
+          "value": "not-used",
+          "label": "I haven’t talked with AI"
+        },
+        {
+          "value": "private",
+          "label": "Prefer not to answer"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "optional": true,
+      "module": "relationships",
+      "condition": "allocated topic: relationships"
+    },
+    {
+      "id": "caring-tasks",
+      "title": "For which caring tasks would you consider using AI?",
+      "art": "garden",
+      "type": "multi",
+      "options": [
+        {
+          "value": "organising",
+          "label": "Organising care"
+        },
+        {
+          "value": "information",
+          "label": "Explaining information"
+        },
+        {
+          "value": "activities",
+          "label": "Suggesting activities"
+        },
+        {
+          "value": "communication",
+          "label": "Helping with communication"
+        },
+        {
+          "value": "companionship",
+          "label": "Providing companionship"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "not-applicable",
+          "label": "Not relevant to me"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "exclusive": [
+        "none",
+        "unsure",
+        "private",
+        "not-applicable"
+      ],
+      "module": "relationships",
+      "condition": "allocated topic: relationships"
+    },
+    {
+      "id": "home-effort",
+      "title": "What effect has AI had on the effort it takes you to manage everyday tasks?",
+      "art": "garden",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Much more effort"
+        },
+        {
+          "value": "1",
+          "label": "Somewhat more effort"
+        },
+        {
+          "value": "2",
+          "label": "No effect"
+        },
+        {
+          "value": "3",
+          "label": "Somewhat less effort"
+        },
+        {
+          "value": "4",
+          "label": "Much less effort"
+        },
+        {
+          "value": "not-used",
+          "label": "I haven’t used it for this"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "module": "home-money",
+      "condition": "allocated topic: home-money"
+    },
+    {
+      "id": "money-advice",
+      "title": "How comfortable would you feel using AI advice when making an important money decision?",
+      "art": "q-work-pressure",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Very uncomfortable"
+        },
+        {
+          "value": "1",
+          "label": "Somewhat uncomfortable"
+        },
+        {
+          "value": "2",
+          "label": "Neither comfortable nor uncomfortable"
+        },
+        {
+          "value": "3",
+          "label": "Somewhat comfortable"
+        },
+        {
+          "value": "4",
+          "label": "Very comfortable"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "module": "home-money",
+      "condition": "allocated topic: home-money"
+    },
+    {
+      "id": "creative-frequency",
+      "title": "What effect has AI had on how often you make things for enjoyment?",
+      "art": "painting",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Much less often"
+        },
+        {
+          "value": "1",
+          "label": "Somewhat less often"
+        },
+        {
+          "value": "2",
+          "label": "No change"
+        },
+        {
+          "value": "3",
+          "label": "Somewhat more often"
+        },
+        {
+          "value": "4",
+          "label": "Much more often"
+        },
+        {
+          "value": "not-applicable",
+          "label": "I don’t do this"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "module": "creativity",
+      "condition": "allocated topic: creativity"
+    },
+    {
+      "id": "identity",
+      "title": "If AI could do something you take pride in better than you, how much would that change how you value yourself?",
+      "art": "mirror",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Not at all"
+        },
+        {
+          "value": "1",
+          "label": "A little"
+        },
+        {
+          "value": "2",
+          "label": "Somewhat"
+        },
+        {
+          "value": "3",
+          "label": "Quite a lot"
+        },
+        {
+          "value": "4",
+          "label": "A great deal"
+        },
+        {
+          "value": "private",
+          "label": "Prefer not to answer"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "optional": true,
+      "module": "creativity",
+      "condition": "allocated topic: creativity"
+    },
+    {
+      "id": "information-check",
+      "title": "In the past three months, how often have you checked something because you suspected it was AI-generated?",
+      "art": "newspaper",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Never"
+        },
+        {
+          "value": "1",
+          "label": "Rarely"
+        },
+        {
+          "value": "2",
+          "label": "Sometimes"
+        },
+        {
+          "value": "3",
+          "label": "Often"
+        },
+        {
+          "value": "4",
+          "label": "Very often"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "module": "public-life",
+      "condition": "allocated topic: public-life"
+    },
+    {
+      "id": "human-review",
+      "title": "If AI helped make an important public-service decision about you, how important would the right to a human review be?",
+      "art": "q-work-pressure",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Not at all important"
+        },
+        {
+          "value": "1",
+          "label": "Slightly important"
+        },
+        {
+          "value": "2",
+          "label": "Moderately important"
+        },
+        {
+          "value": "3",
+          "label": "Very important"
+        },
+        {
+          "value": "4",
+          "label": "Extremely important"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "module": "public-life",
+      "condition": "allocated topic: public-life"
+    },
+    {
+      "id": "financial-benefits",
+      "title": "Who do you expect to benefit most financially from AI over the next three years?",
+      "art": "q-work-pressure",
+      "type": "single",
+      "options": [
+        {
+          "value": "few",
+          "label": "Mainly a small number of people and organisations"
+        },
+        {
+          "value": "even",
+          "label": "Benefits spread fairly evenly"
+        },
+        {
+          "value": "worse-off",
+          "label": "Mainly people currently worse off"
+        },
+        {
+          "value": "none",
+          "label": "No substantial financial benefit"
+        },
+        {
+          "value": "other",
+          "label": "Another outcome"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "module": "fairness",
+      "condition": "allocated topic: fairness"
+    },
+    {
+      "id": "environment",
+      "title": "How much should AI’s environmental impact influence decisions about where it is used?",
+      "art": "garden",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Not at all"
+        },
+        {
+          "value": "1",
+          "label": "A little"
+        },
+        {
+          "value": "2",
+          "label": "Somewhat"
+        },
+        {
+          "value": "3",
+          "label": "Quite a lot"
+        },
+        {
+          "value": "4",
+          "label": "A great deal"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "module": "fairness",
+      "condition": "allocated topic: fairness"
+    },
+    {
+      "id": "country",
+      "title": "Which country or territory do you live in?",
+      "art": "map",
+      "type": "select",
+      "options": [
+        {
+          "value": "AF",
+          "label": "Afghanistan"
+        },
+        {
+          "value": "AX",
+          "label": "Åland Islands"
+        },
+        {
+          "value": "AL",
+          "label": "Albania"
+        },
+        {
+          "value": "DZ",
+          "label": "Algeria"
+        },
+        {
+          "value": "AS",
+          "label": "American Samoa"
+        },
+        {
+          "value": "AD",
+          "label": "Andorra"
+        },
+        {
+          "value": "AO",
+          "label": "Angola"
+        },
+        {
+          "value": "AI",
+          "label": "Anguilla"
+        },
+        {
+          "value": "AQ",
+          "label": "Antarctica"
+        },
+        {
+          "value": "AG",
+          "label": "Antigua & Barbuda"
+        },
+        {
+          "value": "AR",
+          "label": "Argentina"
+        },
+        {
+          "value": "AM",
+          "label": "Armenia"
+        },
+        {
+          "value": "AW",
+          "label": "Aruba"
+        },
+        {
+          "value": "AU",
+          "label": "Australia"
+        },
+        {
+          "value": "AT",
+          "label": "Austria"
+        },
+        {
+          "value": "AZ",
+          "label": "Azerbaijan"
+        },
+        {
+          "value": "BS",
+          "label": "Bahamas"
+        },
+        {
+          "value": "BH",
+          "label": "Bahrain"
+        },
+        {
+          "value": "BD",
+          "label": "Bangladesh"
+        },
+        {
+          "value": "BB",
+          "label": "Barbados"
+        },
+        {
+          "value": "BY",
+          "label": "Belarus"
+        },
+        {
+          "value": "BE",
+          "label": "Belgium"
+        },
+        {
+          "value": "BZ",
+          "label": "Belize"
+        },
+        {
+          "value": "BJ",
+          "label": "Benin"
+        },
+        {
+          "value": "BM",
+          "label": "Bermuda"
+        },
+        {
+          "value": "BT",
+          "label": "Bhutan"
+        },
+        {
+          "value": "BO",
+          "label": "Bolivia"
+        },
+        {
+          "value": "BA",
+          "label": "Bosnia & Herzegovina"
+        },
+        {
+          "value": "BW",
+          "label": "Botswana"
+        },
+        {
+          "value": "BV",
+          "label": "Bouvet Island"
+        },
+        {
+          "value": "BR",
+          "label": "Brazil"
+        },
+        {
+          "value": "IO",
+          "label": "British Indian Ocean Territory"
+        },
+        {
+          "value": "VG",
+          "label": "British Virgin Islands"
+        },
+        {
+          "value": "BN",
+          "label": "Brunei"
+        },
+        {
+          "value": "BG",
+          "label": "Bulgaria"
+        },
+        {
+          "value": "BF",
+          "label": "Burkina Faso"
+        },
+        {
+          "value": "BI",
+          "label": "Burundi"
+        },
+        {
+          "value": "KH",
+          "label": "Cambodia"
+        },
+        {
+          "value": "CM",
+          "label": "Cameroon"
+        },
+        {
+          "value": "CA",
+          "label": "Canada"
+        },
+        {
+          "value": "CV",
+          "label": "Cape Verde"
+        },
+        {
+          "value": "BQ",
+          "label": "Caribbean Netherlands"
+        },
+        {
+          "value": "KY",
+          "label": "Cayman Islands"
+        },
+        {
+          "value": "CF",
+          "label": "Central African Republic"
+        },
+        {
+          "value": "TD",
+          "label": "Chad"
+        },
+        {
+          "value": "CL",
+          "label": "Chile"
+        },
+        {
+          "value": "CN",
+          "label": "China"
+        },
+        {
+          "value": "CX",
+          "label": "Christmas Island"
+        },
+        {
+          "value": "CC",
+          "label": "Cocos (Keeling) Islands"
+        },
+        {
+          "value": "CO",
+          "label": "Colombia"
+        },
+        {
+          "value": "KM",
+          "label": "Comoros"
+        },
+        {
+          "value": "CG",
+          "label": "Congo - Brazzaville"
+        },
+        {
+          "value": "CD",
+          "label": "Congo - Kinshasa"
+        },
+        {
+          "value": "CK",
+          "label": "Cook Islands"
+        },
+        {
+          "value": "CR",
+          "label": "Costa Rica"
+        },
+        {
+          "value": "CI",
+          "label": "Côte d’Ivoire"
+        },
+        {
+          "value": "HR",
+          "label": "Croatia"
+        },
+        {
+          "value": "CU",
+          "label": "Cuba"
+        },
+        {
+          "value": "CW",
+          "label": "Curaçao"
+        },
+        {
+          "value": "CY",
+          "label": "Cyprus"
+        },
+        {
+          "value": "CZ",
+          "label": "Czechia"
+        },
+        {
+          "value": "DK",
+          "label": "Denmark"
+        },
+        {
+          "value": "DJ",
+          "label": "Djibouti"
+        },
+        {
+          "value": "DM",
+          "label": "Dominica"
+        },
+        {
+          "value": "DO",
+          "label": "Dominican Republic"
+        },
+        {
+          "value": "EC",
+          "label": "Ecuador"
+        },
+        {
+          "value": "EG",
+          "label": "Egypt"
+        },
+        {
+          "value": "SV",
+          "label": "El Salvador"
+        },
+        {
+          "value": "GQ",
+          "label": "Equatorial Guinea"
+        },
+        {
+          "value": "ER",
+          "label": "Eritrea"
+        },
+        {
+          "value": "EE",
+          "label": "Estonia"
+        },
+        {
+          "value": "SZ",
+          "label": "Eswatini"
+        },
+        {
+          "value": "ET",
+          "label": "Ethiopia"
+        },
+        {
+          "value": "FK",
+          "label": "Falkland Islands"
+        },
+        {
+          "value": "FO",
+          "label": "Faroe Islands"
+        },
+        {
+          "value": "FJ",
+          "label": "Fiji"
+        },
+        {
+          "value": "FI",
+          "label": "Finland"
+        },
+        {
+          "value": "FR",
+          "label": "France"
+        },
+        {
+          "value": "GF",
+          "label": "French Guiana"
+        },
+        {
+          "value": "PF",
+          "label": "French Polynesia"
+        },
+        {
+          "value": "TF",
+          "label": "French Southern Territories"
+        },
+        {
+          "value": "GA",
+          "label": "Gabon"
+        },
+        {
+          "value": "GM",
+          "label": "Gambia"
+        },
+        {
+          "value": "GE",
+          "label": "Georgia"
+        },
+        {
+          "value": "DE",
+          "label": "Germany"
+        },
+        {
+          "value": "GH",
+          "label": "Ghana"
+        },
+        {
+          "value": "GI",
+          "label": "Gibraltar"
+        },
+        {
+          "value": "GR",
+          "label": "Greece"
+        },
+        {
+          "value": "GL",
+          "label": "Greenland"
+        },
+        {
+          "value": "GD",
+          "label": "Grenada"
+        },
+        {
+          "value": "GP",
+          "label": "Guadeloupe"
+        },
+        {
+          "value": "GU",
+          "label": "Guam"
+        },
+        {
+          "value": "GT",
+          "label": "Guatemala"
+        },
+        {
+          "value": "GG",
+          "label": "Guernsey"
+        },
+        {
+          "value": "GN",
+          "label": "Guinea"
+        },
+        {
+          "value": "GW",
+          "label": "Guinea-Bissau"
+        },
+        {
+          "value": "GY",
+          "label": "Guyana"
+        },
+        {
+          "value": "HT",
+          "label": "Haiti"
+        },
+        {
+          "value": "HM",
+          "label": "Heard & McDonald Islands"
+        },
+        {
+          "value": "HN",
+          "label": "Honduras"
+        },
+        {
+          "value": "HK",
+          "label": "Hong Kong SAR China"
+        },
+        {
+          "value": "HU",
+          "label": "Hungary"
+        },
+        {
+          "value": "IS",
+          "label": "Iceland"
+        },
+        {
+          "value": "IN",
+          "label": "India"
+        },
+        {
+          "value": "ID",
+          "label": "Indonesia"
+        },
+        {
+          "value": "IR",
+          "label": "Iran"
+        },
+        {
+          "value": "IQ",
+          "label": "Iraq"
+        },
+        {
+          "value": "IE",
+          "label": "Ireland"
+        },
+        {
+          "value": "IM",
+          "label": "Isle of Man"
+        },
+        {
+          "value": "IL",
+          "label": "Israel"
+        },
+        {
+          "value": "IT",
+          "label": "Italy"
+        },
+        {
+          "value": "JM",
+          "label": "Jamaica"
+        },
+        {
+          "value": "JP",
+          "label": "Japan"
+        },
+        {
+          "value": "JE",
+          "label": "Jersey"
+        },
+        {
+          "value": "JO",
+          "label": "Jordan"
+        },
+        {
+          "value": "KZ",
+          "label": "Kazakhstan"
+        },
+        {
+          "value": "KE",
+          "label": "Kenya"
+        },
+        {
+          "value": "KI",
+          "label": "Kiribati"
+        },
+        {
+          "value": "KW",
+          "label": "Kuwait"
+        },
+        {
+          "value": "KG",
+          "label": "Kyrgyzstan"
+        },
+        {
+          "value": "LA",
+          "label": "Laos"
+        },
+        {
+          "value": "LV",
+          "label": "Latvia"
+        },
+        {
+          "value": "LB",
+          "label": "Lebanon"
+        },
+        {
+          "value": "LS",
+          "label": "Lesotho"
+        },
+        {
+          "value": "LR",
+          "label": "Liberia"
+        },
+        {
+          "value": "LY",
+          "label": "Libya"
+        },
+        {
+          "value": "LI",
+          "label": "Liechtenstein"
+        },
+        {
+          "value": "LT",
+          "label": "Lithuania"
+        },
+        {
+          "value": "LU",
+          "label": "Luxembourg"
+        },
+        {
+          "value": "MO",
+          "label": "Macao SAR China"
+        },
+        {
+          "value": "MG",
+          "label": "Madagascar"
+        },
+        {
+          "value": "MW",
+          "label": "Malawi"
+        },
+        {
+          "value": "MY",
+          "label": "Malaysia"
+        },
+        {
+          "value": "MV",
+          "label": "Maldives"
+        },
+        {
+          "value": "ML",
+          "label": "Mali"
+        },
+        {
+          "value": "MT",
+          "label": "Malta"
+        },
+        {
+          "value": "MH",
+          "label": "Marshall Islands"
+        },
+        {
+          "value": "MQ",
+          "label": "Martinique"
+        },
+        {
+          "value": "MR",
+          "label": "Mauritania"
+        },
+        {
+          "value": "MU",
+          "label": "Mauritius"
+        },
+        {
+          "value": "YT",
+          "label": "Mayotte"
+        },
+        {
+          "value": "MX",
+          "label": "Mexico"
+        },
+        {
+          "value": "FM",
+          "label": "Micronesia"
+        },
+        {
+          "value": "MD",
+          "label": "Moldova"
+        },
+        {
+          "value": "MC",
+          "label": "Monaco"
+        },
+        {
+          "value": "MN",
+          "label": "Mongolia"
+        },
+        {
+          "value": "ME",
+          "label": "Montenegro"
+        },
+        {
+          "value": "MS",
+          "label": "Montserrat"
+        },
+        {
+          "value": "MA",
+          "label": "Morocco"
+        },
+        {
+          "value": "MZ",
+          "label": "Mozambique"
+        },
+        {
+          "value": "MM",
+          "label": "Myanmar (Burma)"
+        },
+        {
+          "value": "NA",
+          "label": "Namibia"
+        },
+        {
+          "value": "NR",
+          "label": "Nauru"
+        },
+        {
+          "value": "NP",
+          "label": "Nepal"
+        },
+        {
+          "value": "NL",
+          "label": "Netherlands"
+        },
+        {
+          "value": "NC",
+          "label": "New Caledonia"
+        },
+        {
+          "value": "NZ",
+          "label": "New Zealand"
+        },
+        {
+          "value": "NI",
+          "label": "Nicaragua"
+        },
+        {
+          "value": "NE",
+          "label": "Niger"
+        },
+        {
+          "value": "NG",
+          "label": "Nigeria"
+        },
+        {
+          "value": "NU",
+          "label": "Niue"
+        },
+        {
+          "value": "NF",
+          "label": "Norfolk Island"
+        },
+        {
+          "value": "KP",
+          "label": "North Korea"
+        },
+        {
+          "value": "MK",
+          "label": "North Macedonia"
+        },
+        {
+          "value": "MP",
+          "label": "Northern Mariana Islands"
+        },
+        {
+          "value": "NO",
+          "label": "Norway"
+        },
+        {
+          "value": "OM",
+          "label": "Oman"
+        },
+        {
+          "value": "PK",
+          "label": "Pakistan"
+        },
+        {
+          "value": "PW",
+          "label": "Palau"
+        },
+        {
+          "value": "PS",
+          "label": "Palestinian Territories"
+        },
+        {
+          "value": "PA",
+          "label": "Panama"
+        },
+        {
+          "value": "PG",
+          "label": "Papua New Guinea"
+        },
+        {
+          "value": "PY",
+          "label": "Paraguay"
+        },
+        {
+          "value": "PE",
+          "label": "Peru"
+        },
+        {
+          "value": "PH",
+          "label": "Philippines"
+        },
+        {
+          "value": "PN",
+          "label": "Pitcairn Islands"
+        },
+        {
+          "value": "PL",
+          "label": "Poland"
+        },
+        {
+          "value": "PT",
+          "label": "Portugal"
+        },
+        {
+          "value": "PR",
+          "label": "Puerto Rico"
+        },
+        {
+          "value": "QA",
+          "label": "Qatar"
+        },
+        {
+          "value": "RE",
+          "label": "Réunion"
+        },
+        {
+          "value": "RO",
+          "label": "Romania"
+        },
+        {
+          "value": "RU",
+          "label": "Russia"
+        },
+        {
+          "value": "RW",
+          "label": "Rwanda"
+        },
+        {
+          "value": "WS",
+          "label": "Samoa"
+        },
+        {
+          "value": "SM",
+          "label": "San Marino"
+        },
+        {
+          "value": "ST",
+          "label": "São Tomé & Príncipe"
+        },
+        {
+          "value": "SA",
+          "label": "Saudi Arabia"
+        },
+        {
+          "value": "SN",
+          "label": "Senegal"
+        },
+        {
+          "value": "RS",
+          "label": "Serbia"
+        },
+        {
+          "value": "SC",
+          "label": "Seychelles"
+        },
+        {
+          "value": "SL",
+          "label": "Sierra Leone"
+        },
+        {
+          "value": "SG",
+          "label": "Singapore"
+        },
+        {
+          "value": "SX",
+          "label": "Sint Maarten"
+        },
+        {
+          "value": "SK",
+          "label": "Slovakia"
+        },
+        {
+          "value": "SI",
+          "label": "Slovenia"
+        },
+        {
+          "value": "SB",
+          "label": "Solomon Islands"
+        },
+        {
+          "value": "SO",
+          "label": "Somalia"
+        },
+        {
+          "value": "ZA",
+          "label": "South Africa"
+        },
+        {
+          "value": "GS",
+          "label": "South Georgia & South Sandwich Islands"
+        },
+        {
+          "value": "KR",
+          "label": "South Korea"
+        },
+        {
+          "value": "SS",
+          "label": "South Sudan"
+        },
+        {
+          "value": "ES",
+          "label": "Spain"
+        },
+        {
+          "value": "LK",
+          "label": "Sri Lanka"
+        },
+        {
+          "value": "BL",
+          "label": "St. Barthélemy"
+        },
+        {
+          "value": "SH",
+          "label": "St. Helena"
+        },
+        {
+          "value": "KN",
+          "label": "St. Kitts & Nevis"
+        },
+        {
+          "value": "LC",
+          "label": "St. Lucia"
+        },
+        {
+          "value": "MF",
+          "label": "St. Martin"
+        },
+        {
+          "value": "PM",
+          "label": "St. Pierre & Miquelon"
+        },
+        {
+          "value": "VC",
+          "label": "St. Vincent & Grenadines"
+        },
+        {
+          "value": "SD",
+          "label": "Sudan"
+        },
+        {
+          "value": "SR",
+          "label": "Suriname"
+        },
+        {
+          "value": "SJ",
+          "label": "Svalbard & Jan Mayen"
+        },
+        {
+          "value": "SE",
+          "label": "Sweden"
+        },
+        {
+          "value": "CH",
+          "label": "Switzerland"
+        },
+        {
+          "value": "SY",
+          "label": "Syria"
+        },
+        {
+          "value": "TW",
+          "label": "Taiwan"
+        },
+        {
+          "value": "TJ",
+          "label": "Tajikistan"
+        },
+        {
+          "value": "TZ",
+          "label": "Tanzania"
+        },
+        {
+          "value": "TH",
+          "label": "Thailand"
+        },
+        {
+          "value": "TL",
+          "label": "Timor-Leste"
+        },
+        {
+          "value": "TG",
+          "label": "Togo"
+        },
+        {
+          "value": "TK",
+          "label": "Tokelau"
+        },
+        {
+          "value": "TO",
+          "label": "Tonga"
+        },
+        {
+          "value": "TT",
+          "label": "Trinidad & Tobago"
+        },
+        {
+          "value": "TN",
+          "label": "Tunisia"
+        },
+        {
+          "value": "TR",
+          "label": "Türkiye"
+        },
+        {
+          "value": "TM",
+          "label": "Turkmenistan"
+        },
+        {
+          "value": "TC",
+          "label": "Turks & Caicos Islands"
+        },
+        {
+          "value": "TV",
+          "label": "Tuvalu"
+        },
+        {
+          "value": "UM",
+          "label": "U.S. Outlying Islands"
+        },
+        {
+          "value": "VI",
+          "label": "U.S. Virgin Islands"
+        },
+        {
+          "value": "UG",
+          "label": "Uganda"
+        },
+        {
+          "value": "UA",
+          "label": "Ukraine"
+        },
+        {
+          "value": "AE",
+          "label": "United Arab Emirates"
+        },
+        {
+          "value": "GB",
+          "label": "United Kingdom"
+        },
+        {
+          "value": "US",
+          "label": "United States"
+        },
+        {
+          "value": "UY",
+          "label": "Uruguay"
+        },
+        {
+          "value": "UZ",
+          "label": "Uzbekistan"
+        },
+        {
+          "value": "VU",
+          "label": "Vanuatu"
+        },
+        {
+          "value": "VA",
+          "label": "Vatican City"
+        },
+        {
+          "value": "VE",
+          "label": "Venezuela"
+        },
+        {
+          "value": "VN",
+          "label": "Vietnam"
+        },
+        {
+          "value": "WF",
+          "label": "Wallis & Futuna"
+        },
+        {
+          "value": "EH",
+          "label": "Western Sahara"
+        },
+        {
+          "value": "YE",
+          "label": "Yemen"
+        },
+        {
+          "value": "ZM",
+          "label": "Zambia"
+        },
+        {
+          "value": "ZW",
+          "label": "Zimbabwe"
+        },
+        {
+          "value": "other",
+          "label": "Another country or territory"
+        },
+        {
+          "value": "private",
+          "label": "Prefer not to answer"
+        }
+      ],
+      "optional": true,
+      "condition": "all participants"
+    },
+    {
+      "id": "age",
+      "title": "What is your age group?",
+      "art": "memory",
+      "type": "single",
+      "options": [
+        {
+          "value": "18-24",
+          "label": "18–24"
+        },
+        {
+          "value": "25-34",
+          "label": "25–34"
+        },
+        {
+          "value": "35-44",
+          "label": "35–44"
+        },
+        {
+          "value": "45-54",
+          "label": "45–54"
+        },
+        {
+          "value": "55-64",
+          "label": "55–64"
+        },
+        {
+          "value": "65-74",
+          "label": "65–74"
+        },
+        {
+          "value": "75+",
+          "label": "75+"
+        },
+        {
+          "value": "private",
+          "label": "Prefer not to answer"
+        }
+      ],
+      "optional": true,
+      "condition": "all participants"
+    },
+    {
+      "id": "finances",
+      "title": "How comfortably does your household manage financially at the moment?",
+      "art": "q-wallet",
+      "type": "single",
+      "options": [
+        {
+          "value": "0",
+          "label": "Very comfortably"
+        },
+        {
+          "value": "1",
+          "label": "Fairly comfortably"
+        },
+        {
+          "value": "2",
+          "label": "Just getting by"
+        },
+        {
+          "value": "3",
+          "label": "Finding it fairly difficult"
+        },
+        {
+          "value": "4",
+          "label": "Finding it very difficult"
+        },
+        {
+          "value": "private",
+          "label": "Prefer not to answer"
+        },
+        {
+          "value": "unsure",
+          "label": "I’m not sure"
+        }
+      ],
+      "optional": true,
+      "condition": "all participants"
+    },
+    {
+      "id": "builders",
+      "title": "What is one thing you want the people shaping AI to understand about your life?",
+      "art": "letter",
+      "type": "text",
+      "optional": true,
+      "placeholder": "Something you hope they will understand…",
+      "condition": "all participants"
+    }
+  ]
+}

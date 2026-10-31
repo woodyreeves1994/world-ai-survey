@@ -1,4 +1,6 @@
 // Only the publishable app key is embedded. Database credentials stay in the Edge runtime.
+import './legacy-model-v6.js';
+import './legacy-validation-v6.js';
 import './survey-model.js';
 import './validation.js';
 const model=(globalThis as any).SurveyModel;
@@ -21,7 +23,10 @@ Deno.serve(async (req:Request) => {
     while(true){const {done,value}=await reader.read();if(done)break;size+=value.length;if(size>40000){await reader.cancel();return reply(413,{error:'Submission is too large.'});}chunks.push(value);}
     const bytes=new Uint8Array(size);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}
     let body;try{body=JSON.parse(new TextDecoder().decode(bytes));}catch{return reply(400,{error:'Invalid JSON.'});}
-    const validated=validate(body,model);
+    // Existing open V6 tabs can finish without relabelling their older questionnaire.
+    const validated=body?.version===6
+      ?(globalThis as any).LegacySubmissionValidation.validateSubmission(body,(globalThis as any).LegacySurveyModel)
+      :validate(body,model);
     if(validated.error) return reply(400,{error:validated.error});
     const url=Deno.env.get('SUPABASE_URL');const secret=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
     if(!url||!secret) return reply(503,{error:'Submission service unavailable.'});
